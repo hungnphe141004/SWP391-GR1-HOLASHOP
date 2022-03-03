@@ -8,6 +8,18 @@
         <servlet-name>UserListController</servlet-name>
         <servlet-class>controller.UserListController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DescriptionController</servlet-name>
+        <servlet-class>controller.DescriptionController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductListController</servlet-name>
+        <servlet-class>controller.ProductListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FeedbackController</servlet-name>
+        <servlet-class>controller.FeedbackController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -15,6 +27,18 @@
     <servlet-mapping>
         <servlet-name>UserListController</servlet-name>
         <url-pattern>/userlist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DescriptionController</servlet-name>
+        <url-pattern>/detail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductListController</servlet-name>
+        <url-pattern>/list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FeedbackController</servlet-name>
+        <url-pattern>/feedback</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
