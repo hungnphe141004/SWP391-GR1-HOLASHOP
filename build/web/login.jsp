@@ -1,11 +1,10 @@
 <%-- 
-    Document   : register
-    Created on : Feb 16, 2022, 8:29:00 AM
+    Document   : login
+    Created on : Mar 4, 2022, 12:16:40 AM
     Author     : ASUS
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -98,7 +97,7 @@
                                     <li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
                                     <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                                     <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                                    <li><a href="login.jsp" class="active"><i class="fa fa-lock"></i> Login</a></li>
+                                    <li><a href="login.html" class="active"><i class="fa fa-lock"></i> Login</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -150,36 +149,15 @@
                 </div>
             </div><!--/header-bottom-->
         </header><!--/header-->
-    <body>
-        <form action="register" method="POST">
-            <table border="0">
-                
-                <tbody>
-                    <tr>
-                        <td>UserName</td>
-                        <td><input type="text" name="userName"></td>
-                    </tr>
-                    <tr>
-                        <td>Password</td>
-                        <td><input type="text" name="password"></td>
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-                        
-                <td><input type="text" name="email"></td>
-                        
-                    </tr>
-                   
-                    <tr>
-                       
-                        <td><input type="submit" value="Register"</td>
-                    </tr>
-                </tbody>
-            </table>
-
+    
+         <body>
+        <form method="POST" action="login">
+            UserName: <input type="text" name="user"/> <br/>
+            Password: <input type="password" name="pass"/> <br/>
+            <input type="submit" value="Login"/>
         </form>
     </body>
-    <footer id="footer"><!--Footer-->
+     <footer id="footer"><!--Footer-->
             <div class="footer-top">
                 <div class="container">
                     <div class="row">
@@ -336,5 +314,14 @@
             </div>
 
         </footer><!--/Footer-->
+
+
+
+        <script src="js/jquery.js"></script>
+        <script src="js/price-range.js"></script>
+        <script src="js/jquery.scrollUp.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.prettyPhoto.js"></script>
+        <script src="js/main.js"></script>
 
 </html>
