@@ -5,6 +5,7 @@
  */
 package controller;
 
+import connect.CategoryDBContext;
 import connect.FeedbackDBContext;
 import connect.ProductDBContext;
 import java.io.IOException;
@@ -16,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Category;
 import model.Feedback;
 import model.Product;
 
@@ -42,7 +44,7 @@ public class DescriptionController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DescriptionController</title>");            
+            out.println("<title>Servlet DescriptionController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet DescriptionController at " + request.getContextPath() + "</h1>");
@@ -67,12 +69,14 @@ public class DescriptionController extends HttpServlet {
         ProductDBContext db = new ProductDBContext();
         Product product = db.getProduct(ProID);
         request.setAttribute("product", product);
-        
+
         ArrayList<Product> products = db.getAll();
         request.setAttribute("products", products);
-        
-        
-        
+
+        CategoryDBContext cdb = new CategoryDBContext();
+        ArrayList<Category> cates = cdb.getCates();
+        request.setAttribute("cates", cates);
+
         request.getRequestDispatcher("/product/detail.jsp").forward(request, response);
     }
 
@@ -89,24 +93,24 @@ public class DescriptionController extends HttpServlet {
             throws ServletException, IOException {
         LocalDate date = java.time.LocalDate.now();
         request.setAttribute("date", date);
-        
+
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String feedback = request.getParameter("feedback");
         int id = Integer.valueOf(request.getParameter("id"));
-        
+
         FeedbackDBContext fdb = new FeedbackDBContext();
-        ProductDBContext db = new  ProductDBContext();
+        ProductDBContext db = new ProductDBContext();
         ArrayList<Product> products = db.getAll();
         request.setAttribute("products", products);
-        Feedback f  = new Feedback();
+        Feedback f = new Feedback();
         f.setName(name);
         f.setEmail(email);
         f.setFeedback(feedback);
         f.setDate(Date.valueOf(date));
         f.setId(id);
         fdb.insert(f);
-        
+
         response.sendRedirect("list");
     }
 

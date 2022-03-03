@@ -5,6 +5,7 @@
  */
 package controller;
 
+import connect.CategoryDBContext;
 import connect.ProductDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Category;
 import model.Product;
 
 /**
@@ -62,6 +64,10 @@ public class ProductListController extends HttpServlet {
         ProductDBContext db = new  ProductDBContext();
         ArrayList<Product> products = db.getAll();
         request.setAttribute("products", products);
+        
+        CategoryDBContext cdb = new CategoryDBContext();
+        ArrayList<Category> cates = cdb.getCates();
+        request.setAttribute("cates", cates);
         
         request.getRequestDispatcher("/product/list.jsp").forward(request, response);
     }
