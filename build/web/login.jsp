@@ -1,11 +1,10 @@
 <%-- 
-    Document   : userList
-    Created on : Feb 28, 2022, 10:14:25 PM
+    Document   : login
+    Created on : Mar 4, 2022, 12:16:40 AM
     Author     : ASUS
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -98,7 +97,7 @@
                                     <li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
                                     <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                                     <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                                    <li><a href="login.jsp" class="active"><i class="fa fa-lock"></i> Login</a></li>
+                                    <li><a href="login.html" class="active"><i class="fa fa-lock"></i> Login</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -127,7 +126,7 @@
                                             <li><a href="product-details.html">Product Details</a></li> 
                                             <li><a href="checkout.html">Checkout</a></li> 
                                             <li><a href="cart.html">Cart</a></li> 
-                                            <li><a href="login.html" class="active">Login</a></li> 
+                                            <li><a href="login.jsp" class="active">Login</a></li> 
                                         </ul>
                                     </li> 
                                     <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
@@ -150,31 +149,12 @@
                 </div>
             </div><!--/header-bottom-->
         </header><!--/header-->
-    <body>
-         <form method="POST">
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>UserName</th>
-                        <th>Password</th>
-                        <th>Email</th>
-                       
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="b" items="${requestScope.users}">
-                        <tr>
-                        
-                        
-                        <td>${b.userNamme}</td>
-                        <td>${b.password}</td>
-                        <td>${b.email}</td>
-                      
-                    </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-
+    
+         <body>
+        <form method="POST" action="login">
+            UserName: <input type="text" name="user"/> <br/>
+            Password: <input type="password" name="pass"/> <br/>
+            <input type="submit" value="Login"/>
         </form>
     </body>
      <footer id="footer"><!--Footer-->
