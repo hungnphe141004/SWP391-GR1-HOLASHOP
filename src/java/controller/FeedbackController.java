@@ -61,9 +61,19 @@ public class FeedbackController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String raw_page = request.getParameter("page");
+        if(raw_page ==null || raw_page.length() ==0)
+            raw_page = "1";
+        int page = Integer.parseInt(raw_page);
         FeedbackDBContext fdb = new FeedbackDBContext();
-        ArrayList<Feedback> feedbacks = fdb.getAll();
+        int pagesize = 2;
+        ArrayList<Feedback> feedbacks = fdb.getAll(pagesize,page);
         request.setAttribute("feedbacks", feedbacks);
+        
+        int count = fdb.getRowCount();
+        int totalpage = (count % pagesize==0)?count / pagesize:(count / pagesize)+1;
+        request.setAttribute("totalpage", totalpage);
+        request.setAttribute("pageindex", page);
         
         ProductDBContext db = new  ProductDBContext();
         ArrayList<Product> products = db.getAll();

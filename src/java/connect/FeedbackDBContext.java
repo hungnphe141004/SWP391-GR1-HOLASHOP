@@ -24,7 +24,7 @@ import model.Product;
  */
 public class FeedbackDBContext extends DBContext {
 
-     public void insert(Feedback feedback) {
+    public void insert(Feedback feedback) {
         try {
             String sql = "INSERT INTO [Comment]\n"
                     + "           ([Name]\n"
@@ -51,20 +51,28 @@ public class FeedbackDBContext extends DBContext {
         }
     }
 
-    public ArrayList<Feedback> getAll() {
+    public ArrayList<Feedback> getAll(int pagesize, int pageindex) {
         ArrayList<Feedback> feedbacks = new ArrayList<>();
         try {
-            String sql = "SELECT [Comment].[ID]\n"
-                    + "      ,[Comment].[Name]\n"
-                    + "      ,[Comment].[Email]\n"
-                    + "      ,[Comment].[CommentDate]\n"
-                    + "      ,[Comment].[CommentDetail]\n"
-                    + "      ,[Comment].[ProductId]\n"
-                    + "	  ,[ProductImg].[ProductImgURL]\n"
-                    + "	  ,[Product].[ProductName]\n"
-                    + "  FROM [Comment] inner join [ProductImg] on [Comment].[ProductId] = [ProductImg].[ProductID] inner join\n"
-                    + "  [Product] on [Comment].[ProductId] = [Product].[ProductID]";
+            String sql = "SELECT ID\n"
+                    + "      ,Name\n"
+                    + "      ,Email\n"
+                    + "      ,CommentDate\n"
+                    + "      ,CommentDetail\n"
+                    + "      ,ProductId\n"
+                    + "	  ,ProductImgURL\n"
+                    + "	  ,ProductName\n"
+                    + "  FROM (SELECT ROW_NUMBER() OVER (ORDER BY Comment.ID asc) as rownum, [Comment].[ID],\n"
+                    + "  [Comment].[Name],[Comment].[Email],[Comment].[CommentDate],[Comment].[CommentDetail],\n"
+                    + "  [Comment].[ProductId],[ProductImg].[ProductImgURL],[Product].[ProductName]\n"
+                    + "  FROM [Comment] inner join [ProductImg] on [Comment].[ProductId] = [ProductImg].[ProductID]\n"
+                    + "  inner join [Product] on [Comment].[ProductId] = [Product].[ProductID]) t where \n"
+                    + "  rownum >= (? - 1)*? + 1 AND rownum <= ?*?";
             PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, pageindex);
+            stm.setInt(2, pagesize);
+            stm.setInt(3, pageindex);
+            stm.setInt(4, pagesize);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Feedback s = new Feedback();
@@ -89,6 +97,20 @@ public class FeedbackDBContext extends DBContext {
         }
         return feedbacks;
     }
+    
+    public int getRowCount() {
+        try {
+            String sql = "SELECT COUNT(*) as Total FROM Comment";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("Total");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
 
     public static void main(String[] args) {
         FeedbackDBContext fdb = new FeedbackDBContext();
@@ -102,8 +124,8 @@ public class FeedbackDBContext extends DBContext {
 //
 //        fdb.insert(f);
 
-        System.out.println(fdb.getAll().get(0).getName());
-        System.out.println(fdb.getAll().get(0).getImg().getImage());
-        System.out.println(fdb.getAll().get(0).getProduct_name().getProduct_name());
+//        System.out.println(fdb.getAll().get(0).getName());
+//        System.out.println(fdb.getAll().get(0).getImg().getImage());
+//        System.out.println(fdb.getAll().get(0).getProduct_name().getProduct_name());
     }
 }

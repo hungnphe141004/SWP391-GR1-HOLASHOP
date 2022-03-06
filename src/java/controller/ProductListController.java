@@ -61,14 +61,24 @@ public class ProductListController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ProductDBContext db = new  ProductDBContext();
-        ArrayList<Product> products = db.getAll();
+        String raw_page = request.getParameter("page");
+        if(raw_page ==null || raw_page.length() ==0)
+            raw_page = "1";
+        int page = Integer.parseInt(raw_page);
+        ProductDBContext db = new ProductDBContext();
+        int pagesize = 6;
+        ArrayList<Product> products = db.pagging(pagesize,page);
         request.setAttribute("products", products);
         
+        int count = db.getRowCount();
+        int totalpage = (count % pagesize==0)?count / pagesize:(count / pagesize)+1;
+        request.setAttribute("totalpage", totalpage);
+        request.setAttribute("pageindex", page);
+
         CategoryDBContext cdb = new CategoryDBContext();
         ArrayList<Category> cates = cdb.getCates();
         request.setAttribute("cates", cates);
-        
+
         request.getRequestDispatcher("/product/list.jsp").forward(request, response);
     }
 

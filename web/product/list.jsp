@@ -32,13 +32,13 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-
+        <script src="js/pagger.js" type="text/javascript"></script>
 
     </head>
     <body>
 
-        
-     
+
+
 
         <header id="header"><!--header-->
             <div class="header_top"><!--header_top-->
@@ -138,7 +138,7 @@
                                         </ul>
                                     </li> 
                                     <li class="dropdown"><a href="feedback">Feedback<i class=""></i></a>
-                                        
+
                                     </li> 
                                     <li><a href="404.html">404</a></li>
                                     <li><a href="contact-us.html">Contact</a></li>
@@ -191,7 +191,7 @@
                                 <h2>Brands</h2>
                                 <div class="brands-name">
                                     <ul class="nav nav-pills nav-stacked">
-                                       
+
                                     </ul>
                                 </div>
                             </div><!--/brands_products-->
@@ -224,7 +224,7 @@
                                                 <p><a href="detail?ProID=${s.product_id}">${s.product_name}</a></p>
                                                 <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                             </div>
-                                            
+
                                         </div>
                                         <div class="choose">
                                             <ul class="nav nav-pills nav-justified">
@@ -236,6 +236,15 @@
                                 </div>
                             </c:forEach>
 
+                            <ul class="pagination">
+                                <li onclick="active"> <div id="paggerBottom" class="pagger"></div></li>
+
+
+                                <script>
+                                    // createPagger('paggerTop',${requestScope.pageindex},2,${requestScope.totalpage});
+                                    createPagger('paggerBottom',${requestScope.pageindex}, 2,${requestScope.totalpage});
+                                </script>
+                            </ul>
 
 
                         </div><!--features_items-->

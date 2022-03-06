@@ -64,6 +64,70 @@ public class ProductDBContext extends DBContext {
         }
         return products;
     }
+    
+    public ArrayList<Product> pagging(int pagesize, int pageindex) {
+        ArrayList<Product> products = new ArrayList<>();
+        try {
+            String sql = "SELECT ProductID\n"
+                    + "      ,ProductName\n"
+                    + "      ,Description\n"
+                    + "      ,SellPrice\n"
+                    + "      ,Amount\n"
+                    + "	  ,CategoryID\n"
+                    + "	  ,CategoryName\n"
+                    + "	  ,ProductImgURL\n"
+                    + "	   FROM (SELECT ROW_NUMBER() OVER (ORDER BY Product.ProductID asc) as rownum, [Product].[ProductID]\n"
+                    + "	   ,[Product].[ProductName],[Product].[Description],[Product].[SellPrice],[Product].[Amount]\n"
+                    + "	   ,[Category].[CategoryID] ,[Category].[CategoryName],[ProductImg].[ProductImgURL]\n"
+                    + "  FROM [Product] inner join [Category] on [Product].[SubCategoryID] = [Category].[CategoryID]\n"
+                    + "  inner join [ProductImg] on [Product].[ProductID] = [ProductImg].[ProductID]) t where \n"
+                    + "  rownum >= (? - 1)*? + 1 AND rownum <= ?*?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, pageindex);
+            stm.setInt(2, pagesize);
+            stm.setInt(3, pageindex);
+            stm.setInt(4, pagesize);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Product s = new Product();
+                s.setProduct_id(rs.getInt("ProductID"));
+                s.setProduct_name(rs.getString("ProductName"));
+
+                s.setDescription(rs.getString("Description"));
+                s.setPrice(rs.getInt("SellPrice"));
+                s.setStock(rs.getInt("Amount"));
+
+                Category d = new Category();
+                d.setId(rs.getInt("CategoryID"));
+                d.setName(rs.getString("CategoryName"));
+
+                Image i = new Image();
+                i.setImage(rs.getString("ProductImgURL"));
+                s.setImg(i);
+                s.setCate(d);
+
+                products.add(s);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return products;
+    }
+    
+    public int getRowCount() {
+        try {
+            String sql = "SELECT COUNT(*) as Total FROM Product";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("Total");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
 
     public Product getProduct(int ProID) {
         ArrayList<Product> products = new ArrayList<>();

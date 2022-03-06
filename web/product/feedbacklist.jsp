@@ -30,6 +30,7 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+        <script src="js/pagger_1.js" type="text/javascript"></script>
     </head><!--/head-->
 
     <body>
@@ -171,13 +172,13 @@
                                     </div>
                                 </c:forEach>
                             </div>
-                            
+
 
                             <div class="brands_products"><!--brands_products-->
                                 <h2>Brands</h2>
                                 <div class="brands-name">
                                     <ul class="nav nav-pills nav-stacked">
-                                        
+
                                     </ul>
                                 </div>
                             </div><!--/brands_products-->
@@ -220,14 +221,17 @@
                             </c:forEach>
 
 
+
                             <div class="pagination-area">
                                 <ul class="pagination">
-                                    <li><a href="" class="active">1</a></li>
-                                    <li><a href="">2</a></li>
-                                    <li><a href="">3</a></li>
-                                    <li><a href=""><i class="fa fa-angle-double-right"></i></a></li>
-                                </ul>
-                            </div>
+                                    <li onclick="active"> <div id="paggerBottom" class="pagger"></div></li>
+
+
+                                    <script>
+                                        // createPagger('paggerTop',${requestScope.pageindex},2,${requestScope.totalpage});
+                                        createPagger('paggerBottom',${requestScope.pageindex}, 2,${requestScope.totalpage});
+                                    </script>
+                                </ul>                            </div>
                         </div>
                     </div>
                 </div>
