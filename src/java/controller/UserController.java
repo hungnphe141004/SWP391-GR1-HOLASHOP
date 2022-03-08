@@ -12,39 +12,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.User;
 
 /**
  *
- * @author ASUS
+ * @author User
  */
-public class RegisterController extends HttpServlet {
+public class UserController extends LoginController {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RegisterController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RegisterController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -58,7 +35,7 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         request.getRequestDispatcher("register.jsp").forward(request, response);
+        request.getRequestDispatcher("UserProfile.jsp").forward(request, response);
     }
 
     /**
@@ -72,20 +49,15 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("userName");
-        String password = request.getParameter("password");
-        String email = request.getParameter("email");
-     ;
-        
         UserDAO db = new UserDAO();
-        User u = new User();
-        u.setUserName(username);
-        u.setPassword(password);
-        u.setEmail(email);
-       ;
-        
-        db.register(u);
-        response.getWriter().println("Register successful");
+        HttpSession session = request.getSession();
+        User user = new User();
+        user.setEmail(request.getParameter("email"));
+        user.setUserName(request.getParameter("userName"));
+        user.setPassword(request.getParameter("password"));        
+        db.updateUser(user);        
+        session.setAttribute("user", user);
+        request.getRequestDispatcher("UserProfile.jsp").forward(request, response);
     }
 
     /**

@@ -77,8 +77,8 @@ public class LoginController extends HttpServlet {
         LoginDAO db = new LoginDAO();
         User u = db.getAccountByUserAndPass(user, pass);
         if(u != null){
-            response.getWriter().println("Login successful");
-            request.getSession().setAttribute("account", u);
+            request.getSession().setAttribute("user", u);
+            request.getRequestDispatcher("homepage.jsp").forward(request, response);
         }else{
             response.getWriter().println("Login Fail");
         }
