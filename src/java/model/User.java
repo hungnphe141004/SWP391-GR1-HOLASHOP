@@ -10,25 +10,25 @@ package model;
  * @author ASUS
  */
 public class User {
-     private String userNamme;
+     private String userName;
     private String password;
     private String email;
 
     public User() {
     }
 
-    public User(String userNamme, String password, String email) {
-        this.userNamme = userNamme;
+    public User(String userName, String password, String email) {
+        this.userName = userName;
         this.password = password;
         this.email = email;
     }
 
-    public String getUserNamme() {
-        return userNamme;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUserNamme(String userNamme) {
-        this.userNamme = userNamme;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -39,6 +39,8 @@ public class User {
         this.password = password;
     }
 
+    
+
     public String getEmail() {
         return email;
     }
@@ -46,6 +48,9 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-    
+    @Override
+    public String toString() {
+        return "User{" + "userName=" + userName + ", password=" + password + ", email=" + email + '}';
+    }
     
 }

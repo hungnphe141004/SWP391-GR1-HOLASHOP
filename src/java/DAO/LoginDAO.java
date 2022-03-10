@@ -20,7 +20,7 @@ import model.User;
 public class LoginDAO extends DBContext{
     public User getAccountByUserAndPass(String user, String pass) {
         try {
-            String sql = "SELECT [Username] FROM Users where [Username] = ?\n"
+            String sql = "SELECT * FROM Users where [Username] = ?\n"
                     + "AND [Password] = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, user);
@@ -28,7 +28,9 @@ public class LoginDAO extends DBContext{
             ResultSet rs = stm.executeQuery();
             while(rs.next()){
                 User u = new User();
-                u.setUserNamme(rs.getString("Username"));
+                u.setUserName(rs.getString("Username"));
+                u.setEmail(rs.getString("email"));
+                u.setPassword(rs.getString("password"));
                 return u;
             }
         } catch (SQLException ex) {

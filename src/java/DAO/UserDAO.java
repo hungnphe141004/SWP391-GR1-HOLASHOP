@@ -31,7 +31,7 @@ public class UserDAO extends DBContext{
                      + "           ,3\n"
                     + "           ,1)";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, model.getUserNamme());
+            stm.setString(1, model.getUserName());
              stm.setString(2, model.getPassword());
             stm.setString(3, model.getEmail());
           
@@ -52,7 +52,7 @@ public class UserDAO extends DBContext{
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 User u = new User();
-                u.setUserNamme(rs.getString("Username"));
+                u.setUserName(rs.getString("Username"));
                  u.setPassword(rs.getString("Password"));
                 u.setEmail(rs.getString("email"));
                
@@ -64,5 +64,43 @@ public class UserDAO extends DBContext{
         }
         return users;
 
+    }
+    
+    public void updateUser(User user){
+               
+        if(checkExitUser(user)){
+            try{
+                String sql ="UPDATE [Users] \n"
+                        + "SET [Password] =?, "
+                        + "[email]=? \n"
+                        + "WHERE [Username] = ?";
+                PreparedStatement stm = connection.prepareStatement(sql);
+                stm.setString(1, user.getPassword());
+                stm.setString(2, user.getEmail());
+                stm.setString(3, user.getUserName());
+                stm.executeUpdate();
+            } catch (SQLException ex) {
+                Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else{
+            System.out.println("This email has already existed!");
+        }
+        
+    }
+    
+    
+    public boolean checkExitUser(User user){
+        ArrayList<User> array = new ArrayList<>();
+        array =  getUserList();
+        for (User u : array){
+            
+            if(u.getUserName().equals(user.getUserName())){
+
+                return true;
+                
+            }
+        }
+        return false;
     }
 }
