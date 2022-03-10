@@ -28,6 +28,18 @@
         <servlet-name>UserController</servlet-name>
         <servlet-class>controller.UserController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewOrderController</servlet-name>
+        <servlet-class>controller.ViewOrderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteOrderController</servlet-name>
+        <servlet-class>controller.DeleteOrderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateOrderController</servlet-name>
+        <servlet-class>controller.UpdateOrderController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -55,6 +67,18 @@
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/UserController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewOrderController</servlet-name>
+        <url-pattern>/viewOrder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteOrderController</servlet-name>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateOrderController</servlet-name>
+        <url-pattern>/updateOrder</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
