@@ -37,7 +37,7 @@ public class LoginController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginController</title>");            
+            out.println("<title>Servlet LoginController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet LoginController at " + request.getContextPath() + "</h1>");
@@ -72,15 +72,23 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         String user = request.getParameter("user");
-        String pass = request.getParameter("pass");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
         LoginDAO db = new LoginDAO();
-        User u = db.getAccountByUserAndPass(user, pass);
-        if(u != null){
-            request.getSession().setAttribute("user", u);
-            request.getRequestDispatcher("homepage.jsp").forward(request, response);
-        }else{
-            response.getWriter().println("Login Fail");
+        User user = db.getAccountByUserAndPass(username, password);
+        if (user != null)//login success
+        {
+
+            request.getSession().setAttribute("user", user);
+            response.sendRedirect("list");
+
+        } else {
+            request.getSession().setAttribute("user", null);
+            PrintWriter pw = response.getWriter();
+            pw.println("<script type=\"text/javascript\">");
+            pw.println("alert('Invalid Username or Password');");
+            pw.println("</script>");
+            
         }
     }
 

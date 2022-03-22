@@ -65,12 +65,12 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="logo pull-left">
-                                <a href="index.html"><img src="images/home/logo.png" alt="" /></a>
+                                <a href="list"><img src="images/home/logo.png" alt="" /></a>
                             </div>
                             <div class="btn-group pull-right">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-                                        USA
+                                        VN
                                         <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu">
@@ -81,7 +81,7 @@
 
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-                                        DOLLAR
+                                        VND
                                         <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu">
@@ -94,11 +94,11 @@
                         <div class="col-sm-8">
                             <div class="shop-menu pull-right">
                                 <ul class="nav navbar-nav">
-                                    <li><a href=""><i class="fa fa-user"></i> Account</a></li>
+                                    <li><a href="UserController"><i class="fa fa-user"></i> Account</a></li>
                                     <li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
                                     <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                                    <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                                    <li><a href="login.html" class="active"><i class="fa fa-lock"></i> Login</a></li>
+                                    <li><a href="cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                                    <li><a href="login" class="active"><i class="fa fa-lock"></i> Login</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -120,14 +120,14 @@
                             </div>
                             <div class="mainmenu pull-left">
                                 <ul class="nav navbar-nav collapse navbar-collapse">
-                                    <li><a href="index.html">Home</a></li>
-                                    <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
+                                    <li><a href="list">Home</a></li>
+                                    <li class="dropdown"><a href=list">Shop<i class="fa fa-angle-down"></i></a>
                                         <ul role="menu" class="sub-menu">
-                                            <li><a href="shop.html">Products</a></li>
+                                            <li><a href="list">Products</a></li>
                                             <li><a href="product-details.html">Product Details</a></li> 
                                             <li><a href="checkout.html">Checkout</a></li> 
-                                            <li><a href="cart.html">Cart</a></li> 
-                                            <li><a href="login.html" class="active">Login</a></li> 
+                                            <li><a href="cart">Cart</a></li> 
+                                            <li><a href="login" class="active">Login</a></li> 
                                         </ul>
                                     </li> 
                                     <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
@@ -141,51 +141,63 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-sm-3">
-                            <div class="search_box pull-right">
-                                <input type="text" placeholder="Search"/>
+                        <form action="search">
+                            <div class="col-sm-3">
+                                <div class="search_box pull-right">
+                                    <input type="text" name="ProductName" value="${requestScope.name}" placeholder="Search"/>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div><!--/header-bottom-->
         </header><!--/header-->
-        
+        <div class="container">
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li><a href="list">Home</a></li>
+                    <li class="active">Account Profile</li>
+                </ol>
+            </div>
+        </div>
+
         <div class="container rounded bg-white mt-5 mb-5">
             <div class="row">  
                 <form method="POST" action="UserController">
-                <div class="col-md-5 border-right">
-                    <div class="p-3 py-5">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h4 class="text-right">Your profile</h4>
+                    <div class="col-md-5 border-right">
+                        <div class="p-3 py-5">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h4 class="text-right">Your profile</h4>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-6"><label class="labels">Name</label>
+                                    <input type="text" class="form-control" id="userName" name="userName"
+                                           value="${sessionScope.user.userName}" readonly>
+
+                                </div>
+
+
+
+                                <div class="col-md-6"><label class="labels">Your Current Password</label>
+                                    <input type="text" class="form-control" id="password" name="password"
+                                           value="${sessionScope.user.password}" required >
+                                </div>
+
+
+                                <div class="col-md-6"><label class="labels">Your Email</label>
+                                    <input type="text" class="form-control" id="email" name="email"
+                                           value="${sessionScope.user.email}"  required>
+                                </div>
+
+
+                            </div>
+                            <button style="width: 250px"
+                                    class="mt-5 text-center btn btn-primary profile-button" type="submit">Update Profile
+                            </button>                     
                         </div>
-                        <div class="row mt-2">
-                            <div class="col-md-6"><label class="labels">Name</label>
-                                <input type="text" class="form-control" id="userName" name="userName"
-                                       value="${sessionScope.user.userName}" readonly>
-                                
-                            </div>
-
-                        
-                                                
-                            <div class="col-md-6"><label class="labels">Your Current Password</label>
-                                <input type="text" class="form-control" id="password" name="password"
-                                       value="${sessionScope.user.password}" required >
-                            </div>
-                            
-
-                            <div class="col-md-6"><label class="labels">Your Email</label>
-                                <input type="text" class="form-control" id="email" name="email"
-                                       value="${sessionScope.user.email}"  required>
-                            </div>
-
-
-                        </div>
-                        <button style="width: 250px"
-                                class="mt-5 text-center btn btn-primary profile-button" type="submit">Update Profile
-                        </button>                     
                     </div>
-                </div>
+
+
                 </form>
                 <div class="col-md-4">
                     <div class="p-3 py-5">
@@ -205,7 +217,7 @@
                 </div>
             </div>
         </div>
-        
+
         <footer id="footer"><!--Footer-->
             <div class="footer-top">
                 <div class="container">

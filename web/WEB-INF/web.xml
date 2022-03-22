@@ -40,6 +40,62 @@
         <servlet-name>UpdateOrderController</servlet-name>
         <servlet-class>controller.UpdateOrderController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchByCatesController</servlet-name>
+        <servlet-class>controller.SearchByCatesController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchController</servlet-name>
+        <servlet-class>controller.SearchController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminListController</servlet-name>
+        <servlet-class>controller.AdminListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddProductController</servlet-name>
+        <servlet-class>controller.AddProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteProductController</servlet-name>
+        <servlet-class>controller.DeleteProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateProductController</servlet-name>
+        <servlet-class>controller.UpdateProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchByBrand</servlet-name>
+        <servlet-class>controller.SearchByBrand</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BasedRequiredAuthenController</servlet-name>
+        <servlet-class>controller.BasedRequiredAuthenController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminDetailController</servlet-name>
+        <servlet-class>controller.AdminDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddToCartController</servlet-name>
+        <servlet-class>controller.AddToCartController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserCartController</servlet-name>
+        <servlet-class>controller.UserCartController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PlusCartController</servlet-name>
+        <servlet-class>controller.PlusCartController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MinusCartController</servlet-name>
+        <servlet-class>controller.MinusCartController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteCartController</servlet-name>
+        <servlet-class>controller.DeleteCartController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -80,9 +136,65 @@
         <servlet-name>UpdateOrderController</servlet-name>
         <url-pattern>/updateOrder</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchByCatesController</servlet-name>
+        <url-pattern>/list1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchController</servlet-name>
+        <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminListController</servlet-name>
+        <url-pattern>/admin/list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddProductController</servlet-name>
+        <url-pattern>/admin/add</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteProductController</servlet-name>
+        <url-pattern>/admin/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProductController</servlet-name>
+        <url-pattern>/admin/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchByBrand</servlet-name>
+        <url-pattern>/bybrand</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BasedRequiredAuthenController</servlet-name>
+        <url-pattern>/BasedRequiredAuthenController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminDetailController</servlet-name>
+        <url-pattern>/admin/detail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddToCartController</servlet-name>
+        <url-pattern>/addtocart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserCartController</servlet-name>
+        <url-pattern>/cart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PlusCartController</servlet-name>
+        <url-pattern>/pluscart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MinusCartController</servlet-name>
+        <url-pattern>/minuscart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCartController</servlet-name>
+        <url-pattern>/deletecart</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            360000
         </session-timeout>
     </session-config>
 </web-app>

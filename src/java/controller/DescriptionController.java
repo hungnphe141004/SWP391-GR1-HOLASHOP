@@ -17,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Brand;
 import model.Category;
 import model.Feedback;
 import model.Product;
@@ -65,17 +66,41 @@ public class DescriptionController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        FeedbackDBContext fdb = new FeedbackDBContext();
+        String raw_page = request.getParameter("page");
+        if (raw_page == null || raw_page.length() == 0) {
+            raw_page = "1";
+        }
+        int page = Integer.parseInt(raw_page);
+        int pagesize = 4;
+
+        int count = fdb.getRowCount();
+        int totalpage = (count % pagesize == 0) ? count / pagesize : (count / pagesize) + 1;
+        request.setAttribute("totalpage", totalpage);
+        request.setAttribute("pageindex", page);
+
         int ProID = Integer.parseInt(request.getParameter("ProID"));
         ProductDBContext db = new ProductDBContext();
         Product product = db.getProduct(ProID);
         request.setAttribute("product", product);
-
+        request.setAttribute("ProID", ProID);
+        
         ArrayList<Product> products = db.getAll();
         request.setAttribute("products", products);
 
         CategoryDBContext cdb = new CategoryDBContext();
         ArrayList<Category> cates = cdb.getCates();
         request.setAttribute("cates", cates);
+
+        ArrayList<Feedback> feeds = fdb.getFeedback(ProID,pagesize,page);
+        request.setAttribute("feeds", feeds);
+
+        int num = fdb.getCount(ProID);
+        request.setAttribute("num", num);
+        
+        ArrayList<Brand> brands = db.getBrand();
+        request.setAttribute("brands", brands);
 
         request.getRequestDispatcher("/product/detail.jsp").forward(request, response);
     }

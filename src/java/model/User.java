@@ -5,16 +5,37 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author ASUS
  */
 public class User {
-     private String userName;
+
+    private int id;
+    private String userName;
     private String password;
     private String email;
+    private ArrayList<Feature> features = new ArrayList<>();
 
     public User() {
+    }
+
+    public ArrayList<Feature> getFeatures() {
+        return features;
+    }
+
+    public void setFeatures(ArrayList<Feature> features) {
+        this.features = features;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public User(String userName, String password, String email) {
@@ -39,8 +60,6 @@ public class User {
         this.password = password;
     }
 
-    
-
     public String getEmail() {
         return email;
     }
@@ -48,9 +67,10 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
     @Override
     public String toString() {
         return "User{" + "userName=" + userName + ", password=" + password + ", email=" + email + '}';
     }
-    
+
 }

@@ -16,12 +16,12 @@ import java.util.logging.Logger;
  * @author Mr D
  */
 public class DBContext {
-    
+
     public Connection connection;
-    public DBContext()
-    {
+
+    public DBContext() {
         try {
-            String username = "sa";
+            String username = "haku";
             String pass = "123";
             String url = "jdbc:sqlserver://localhost:1433;databaseName=HOLASHOP2";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -30,8 +30,5 @@ public class DBContext {
             Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public static void main(String[] args) {
-        new DBContext();
-    }
-    
+
 }

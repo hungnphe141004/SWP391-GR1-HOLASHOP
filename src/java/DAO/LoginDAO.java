@@ -11,28 +11,47 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Feature;
 import model.User;
 
 /**
  *
  * @author ASUS
  */
-public class LoginDAO extends DBContext{
-    public User getAccountByUserAndPass(String user, String pass) {
+public class LoginDAO extends DBContext {
+
+    public User getAccountByUserAndPass(String username, String password) {
         try {
-            String sql = "SELECT * FROM Users where [Username] = ?\n"
-                    + "AND [Password] = ?";
+            String sql = "select u.UserID, u.Username, u.Password, u.email,\n"
+                    + "f.fid, f.url\n"
+                    + "from Users u left join GroupAccount ga on u.Username = ga.username\n"
+                    + "left join [Role] r on r.RoleID = ga.gid\n"
+                    + "left join [GroupFeature] gf on gf.gid = r.RoleID\n"
+                    + "left join [Feature] f on f.fid = gf.fid\n"
+                    + "where u.Username = ? and u.Password = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, user);
-            stm.setString(2, pass);
+            stm.setString(1, username);
+            stm.setString(2, password);
             ResultSet rs = stm.executeQuery();
-            while(rs.next()){
-                User u = new User();
-                u.setUserName(rs.getString("Username"));
-                u.setEmail(rs.getString("email"));
-                u.setPassword(rs.getString("password"));
-                return u;
+            User user = null;
+            while(rs.next())
+            {
+                if(user == null){
+                user = new User();
+                user.setUserName(username);
+                user.setPassword(password);
+                user.setId(Integer.parseInt(rs.getString("UserID")));
+                }
+                int fid = rs.getInt("fid");
+                if(fid !=0)
+                {
+                    Feature f = new Feature();
+                    f.setId(fid);
+                    f.setUrl(rs.getString("url"));
+                    user.getFeatures().add(f);
+                }
             }
+            return user;
         } catch (SQLException ex) {
             Logger.getLogger(LoginDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

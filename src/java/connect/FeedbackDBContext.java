@@ -97,7 +97,7 @@ public class FeedbackDBContext extends DBContext {
         }
         return feedbacks;
     }
-    
+
     public int getRowCount() {
         try {
             String sql = "SELECT COUNT(*) as Total FROM Comment";
@@ -105,6 +105,57 @@ public class FeedbackDBContext extends DBContext {
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
                 return rs.getInt("Total");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    public ArrayList<Feedback> getFeedback(int ProID, int pagesize, int pageindex) {
+        ArrayList<Feedback> feedbacks = new ArrayList<>();
+        try {
+            String sql = "SELECT ID\n"
+                    + ",Name\n"
+                    + ",Email\n"
+                    + ",CommentDate\n"
+                    + ",CommentDetail\n"
+                    + "  FROM (select ROW_NUMBER() Over (Order by [ID] DESC) as rownum, [Comment].[ID],\n"
+                    + "  [Comment].[Name],[Comment].[Email], [Comment].[CommentDate], [Comment].[CommentDetail] FROM\n"
+                    + "  [Comment] inner join [Product] on [Comment].[ProductId] = [Product].[ProductID]\n"
+                    + "  where [Product].[ProductID] = ?) t where rownum >= (? - 1)*? + 1 AND rownum <= ?*?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, ProID);
+            stm.setInt(2, pageindex);
+            stm.setInt(3, pagesize);
+            stm.setInt(4, pageindex);
+            stm.setInt(5, pagesize);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Feedback s = new Feedback();
+                s.setName(rs.getString("Name"));
+                s.setEmail(rs.getString("Email"));
+                s.setDate(rs.getDate("CommentDate"));
+                s.setFeedback(rs.getString("CommentDetail"));
+                feedbacks.add(s);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return feedbacks;
+    }
+
+    public int getCount(int ProID) {
+        try {
+            String sql = "SELECT Count(id) as count \n"
+                    + "  FROM [dbo].[Comment] inner join [Product] on [Comment].[ProductId] = [Product].[ProductID]\n"
+                    + "  where [Product].[ProductID] = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, ProID);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("count");
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProductDBContext.class.getName()).log(Level.SEVERE, null, ex);

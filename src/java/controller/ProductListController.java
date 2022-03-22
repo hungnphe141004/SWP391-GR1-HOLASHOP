@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Brand;
 import model.Category;
 import model.Product;
 
@@ -78,6 +79,9 @@ public class ProductListController extends HttpServlet {
         CategoryDBContext cdb = new CategoryDBContext();
         ArrayList<Category> cates = cdb.getCates();
         request.setAttribute("cates", cates);
+        
+        ArrayList<Brand> brands = db.getBrand();
+        request.setAttribute("brands", brands);
 
         request.getRequestDispatcher("/product/list.jsp").forward(request, response);
     }

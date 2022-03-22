@@ -72,7 +72,7 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="logo pull-left">
-                                <a href="index.html"><img src="images/home/logo.png" alt="" /></a>
+                                <a href="list"><img src="images/home/logo.png" alt="" /></a>
                             </div>
                             <div class="btn-group pull-right">
                                 <div class="btn-group">
@@ -101,11 +101,11 @@
                         <div class="col-sm-8">
                             <div class="shop-menu pull-right">
                                 <ul class="nav navbar-nav">
-                                    <li><a href=""><i class="fa fa-user"></i> Account</a></li>
+                                    <li><a href="UserController"><i class="fa fa-user"></i> Account</a></li>
                                     <li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
                                     <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                                    <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                                    <li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
+                                    <li><a href="cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                                    <li><a href="login"><i class="fa fa-lock"></i> Login</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -127,14 +127,14 @@
                             </div>
                             <div class="mainmenu pull-left">
                                 <ul class="nav navbar-nav collapse navbar-collapse">
-                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="list">Home</a></li>
                                     <li class="dropdown"><a href="#" class="active">Shop<i class="fa fa-angle-down"></i></a>
                                         <ul role="menu" class="sub-menu">
                                             <li><a href="list" class="active">Products</a></li>
                                             <li><a href="detail?ProID=1">Product Details</a></li> 
                                             <li><a href="checkout.html">Checkout</a></li> 
-                                            <li><a href="cart.html">Cart</a></li> 
-                                            <li><a href="login.html">Login</a></li> 
+                                            <li><a href="cart">Cart</a></li> 
+                                            <li><a href="login">Login</a></li> 
                                         </ul>
                                     </li> 
                                     <li class="dropdown"><a href="feedback">Feedback<i class=""></i></a>
@@ -145,11 +145,13 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-sm-3">
-                            <div class="search_box pull-right">
-                                <input type="text" placeholder="Search"/>
+                        <form action="search">
+                            <div class="col-sm-3">
+                                <div class="search_box pull-right">
+                                    <input type="text" name="ProductName" value="${requestScope.name}" placeholder="Search"/>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -168,34 +170,37 @@
                         <div class="left-sidebar">
                             <h2>Category</h2>
 
+                            
+                                <div class="panel-group category-products" id="accordian"><!--category-productsr-->
+                                    <c:forEach items="${requestScope.cates}" var="c">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a href="list1?CateID=${c.id}">
 
-                            <div class="panel-group category-products" id="accordian"><!--category-productsr-->
-                                <c:forEach items="${requestScope.cates}" var="c">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a href="">
+                                                        <p>${c.name}</p>
+                                                    </a>
+                                                </h4>
+                                            </div>
 
-                                                    <p>${c.name}</p>
-                                                </a>
-                                            </h4>
                                         </div>
-
-                                    </div>
-                                </c:forEach>
-                            </div>
-
-
-
-                            <div class="brands_products"><!--brands_products-->
-                                <h2>Brands</h2>
-                                <div class="brands-name">
-                                    <ul class="nav nav-pills nav-stacked">
-
-                                    </ul>
+                                    </c:forEach>
                                 </div>
-                            </div><!--/brands_products-->
 
+
+
+                                <div class="brands_products"><!--brands_products-->
+                                    <h2>Brands</h2>
+                                    <div class="brands-name">
+                                        <ul class="nav nav-pills nav-stacked">
+                                            <c:forEach items="${requestScope.brands}" var="b">
+                                                <li><a href="bybrand?BrandID=${b.id}"><p style="font-weight: bold"> ${b.name}</p></a></li>
+                                                </c:forEach>
+                                        </ul>
+                                    </div>
+                                </div><!--/brands_products-->
+                           
+                            
                             <div class="price-range"><!--price-range-->
                                 <h2>Price Range</h2>
                                 <div class="well">
@@ -222,7 +227,7 @@
                                                 <img src="${s.img.image}" alt="" style="width:140px; height: 140px" />
                                                 <h2>${s.price}VND</h2>
                                                 <p><a href="detail?ProID=${s.product_id}">${s.product_name}</a></p>
-                                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                <a href="addtocart?ProID=${s.product_id}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                             </div>
 
                                         </div>
@@ -236,18 +241,19 @@
                                 </div>
                             </c:forEach>
 
-                            <ul class="pagination">
-                                <li onclick="active"> <div id="paggerBottom" class="pagger"></div></li>
 
-
-                                <script>
-                                    // createPagger('paggerTop',${requestScope.pageindex},2,${requestScope.totalpage});
-                                    createPagger('paggerBottom',${requestScope.pageindex}, 2,${requestScope.totalpage});
-                                </script>
-                            </ul>
 
 
                         </div><!--features_items-->
+                        <ul class="pagination">
+                            <li onclick="" style=""> <div id="paggerBottom" class="pagger"></div></li>
+
+
+                            <script>
+                                // createPagger('paggerTop',${requestScope.pageindex},2,${requestScope.totalpage});
+                                createPagger('paggerBottom',${requestScope.pageindex}, 2,${requestScope.totalpage});
+                            </script>
+                        </ul>
                     </div>
                 </div>
             </div>

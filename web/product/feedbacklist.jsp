@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>Blog | E-Shopper</title>
+        <title>Feedback | E-Shopper</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet">
         <link href="css/prettyPhoto.css" rel="stylesheet">
@@ -141,11 +141,13 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-sm-3">
-                            <div class="search_box pull-right">
-                                <input type="text" placeholder="Search"/>
+                        <form action="search">
+                            <div class="col-sm-3">
+                                <div class="search_box pull-right">
+                                    <input type="text" name="ProductName" value="${requestScope.name}" placeholder="Search"/>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div><!--/header-bottom-->
@@ -158,13 +160,13 @@
                         <div class="left-sidebar">
                             <h2>Category</h2>
                             <div class="panel-group category-products" id="accordian"><!--category-productsr-->
-                                <c:forEach items="${requestScope.products}" var="s">
+                                <c:forEach items="${requestScope.cates}" var="s">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
-                                                <a href="">
+                                                <a href="list1?CateID=${s.id}">
 
-                                                    <p>${s.cate.name}</p>
+                                                    <p>${s.name}</p>
                                                 </a>
                                             </h4>
                                         </div>
@@ -178,7 +180,9 @@
                                 <h2>Brands</h2>
                                 <div class="brands-name">
                                     <ul class="nav nav-pills nav-stacked">
-
+                                        <c:forEach items="${requestScope.brands}" var="b">
+                                            <li><a href="bybrand?BrandID=${b.id}"><p style="font-weight: bold"> ${b.name}</p></a></li>
+                                            </c:forEach>
                                     </ul>
                                 </div>
                             </div><!--/brands_products-->
@@ -198,7 +202,7 @@
                     </div>
                     <div class="col-sm-9">
                         <div class="blog-post-area">
-                            <h2 class="title text-center">Latest Feedback from our Website</h2>
+                            <h2 class="title text-center">Latest Feedback from our Website (${requestScope.num})</h2>
                             <c:forEach items="${requestScope.feedbacks}" var="s">
                                 <div class="single-blog-post">
                                     <h3>${s.product_name.product_name}</h3>
