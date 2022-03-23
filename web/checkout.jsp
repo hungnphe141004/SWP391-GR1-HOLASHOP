@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -66,12 +67,12 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="logo pull-left">
-                                <a href="index.html"><img src="images/home/logo.png" alt="" /></a>
+                                <a href="list"><img src="images/home/logo.png" alt="" /></a>
                             </div>
                             <div class="btn-group pull-right">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-                                        USA
+                                        VN
                                         <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu">
@@ -82,7 +83,7 @@
 
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-                                        DOLLAR
+                                        VND
                                         <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu">
@@ -95,11 +96,11 @@
                         <div class="col-sm-8">
                             <div class="shop-menu pull-right">
                                 <ul class="nav navbar-nav">
-                                    <li><a href=""><i class="fa fa-user"></i> Account</a></li>
+                                    <li><a href="UserController"><i class="fa fa-user"></i> Account</a></li>
                                     <li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
-                                    <li><a href="checkout.html" class="active"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                                    <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                                    <li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
+                                    <li><a href="checkout" class="active"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+                                    <li><a href="cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                                    <li><a href="login"><i class="fa fa-lock"></i> Login</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -121,17 +122,17 @@
                             </div>
                             <div class="mainmenu pull-left">
                                 <ul class="nav navbar-nav collapse navbar-collapse">
-                                    <li><a href="index.html">Home</a></li>
-                                    <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
+                                    <li><a href="list">Home</a></li>
+                                    <li class="dropdown"><a href="list">Shop<i class="fa fa-angle-down"></i></a>
                                         <ul role="menu" class="sub-menu">
-                                            <li><a href="shop.html">Products</a></li>
-                                            <li><a href="product-details.html">Product Details</a></li> 
-                                            <li><a href="checkout.html" class="active">Checkout</a></li> 
-                                            <li><a href="cart.html">Cart</a></li> 
-                                            <li><a href="login.html">Login</a></li> 
+                                            <li><a href="list">Products</a></li>
+                                            <li><a href="detail?ProID=1">Product Details</a></li> 
+                                            <li><a href="checkout" class="active">Checkout</a></li> 
+                                            <li><a href="cart">Cart</a></li> 
+                                            <li><a href="login">Login</a></li> 
                                         </ul>
                                     </li> 
-                                    <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
+                                    <li class="dropdown"><a href="feedback">Blog<i class="fa fa-angle-down"></i></a>
                                         <ul role="menu" class="sub-menu">
                                             <li><a href="blog.html">Blog List</a></li>
                                             <li><a href="blog-single.html">Blog Single</a></li>
@@ -142,11 +143,13 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-sm-3">
-                            <div class="search_box pull-right">
-                                <input type="text" placeholder="Search"/>
+                        <form action="search">
+                            <div class="col-sm-3">
+                                <div class="search_box pull-right">
+                                    <input type="text" name="ProductName" value="${requestScope.name}" placeholder="Search"/>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div><!--/header-bottom-->
@@ -156,10 +159,79 @@
             <div class="container">
                 <div class="breadcrumbs">
                     <ol class="breadcrumb">
-                        <li><a href="#">Home</a></li>
+                        <li><a href="list">Home</a></li>
                         <li class="active">Check out</li>
                     </ol>
                 </div><!--/breadcrums-->
+
+                <div class="table-responsive cart_info">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr class="cart_menu">
+                                <td class="image">Item</td>
+                                <td class="description"></td>
+                                <td class="price">Price</td>
+                                <td class="quantity">Quantity</td>
+                                <td class="total">Total</td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${requestScope.carts}" var="c">
+                                <tr>
+                                    <td class="cart_product">
+                                        <a href=""><img src="${c.img}" alt="" style="width: 120px; height: 120px"></a>
+                                    </td>
+                                    <td class="cart_description">
+                                        <h4><a href="">${c.name}</a></h4>
+                                        <p>Web ID: 1089772</p>
+                                    </td>
+                                    <td class="cart_price">
+                                        <p>${c.price}</p>
+                                    </td>
+                                    <td class="cart_quantity">
+                                        <div class="cart_quantity_button">
+                                            <a class="cart_quantity_up" href="pluscart?ProID=${c.id}"> + </a>
+                                            <input class="cart_quantity_input" type="text" name="quantity" value="${c.amount}" autocomplete="off" size="2">
+                                            <a class="cart_quantity_down" href="minuscart?ProID=${c.id}"> - </a>
+                                        </div>
+                                    </td>
+                                    <td class="cart_total">
+                                        <p class="cart_total_price">${c.getPrice()*c.getAmount()}</p>
+                                    </td>
+                                    <td class="cart_delete">
+                                        <a class="cart_quantity_delete" href="deletecart?ProID=${c.id}"><i class="fa fa-times"></i></a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+
+
+                            <tr>
+                                <td colspan="4">&nbsp;</td>
+                                <td colspan="2">
+                                    <table class="table table-condensed total-result">
+                                        <tr>
+                                            <td>Cart Sub Total</td>
+                                            <td>${requestScope.totalPrice} VND</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Exo Tax</td>
+                                            <td>$2</td>
+                                        </tr>
+                                        <tr class="shipping-cost">
+                                            <td>Shipping Cost</td>
+                                            <td>Free</td>										
+                                        </tr>
+                                        <tr>
+                                            <td>Total</td>
+                                            <td><span>$61</span></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
                 <div class="step-one">
                     <h2 class="heading">Step1</h2>
@@ -188,7 +260,8 @@
                     <div class="row">
                         <div class="col-sm-3">
                             <div class="shopper-info">
-                                <p>Shopper Information</p>
+                                <p>Shipping Information</p>
+
                                 <form>
                                     <input type="text" placeholder="Display Name">
                                     <input type="text" placeholder="User Name">
@@ -201,17 +274,17 @@
                         </div>
                         <div class="col-sm-5 clearfix">
                             <div class="bill-to">
-                                <p>Bill To</p>
+                                <p>Address</p>
+
                                 <div class="form-one">
                                     <form>
-                                        <input type="text" placeholder="Company Name">
-                                        <input type="text" placeholder="Email*">
-                                        <input type="text" placeholder="Title">
-                                        <input type="text" placeholder="First Name *">
-                                        <input type="text" placeholder="Middle Name">
-                                        <input type="text" placeholder="Last Name *">
-                                        <input type="text" placeholder="Address 1 *">
-                                        <input type="text" placeholder="Address 2">
+                                        <c:forEach items="${requestScope.useraddress}" var="u">
+                                            <input type="text" placeholder="Company Name">
+                                            <input type="text" placeholder="Email*">
+                                            <input type="text" placeholder="Title">
+                                            Name <input type="text" placeholder="Name *" value="${u.name}">
+                                            Address <input type="text" placeholder="Address 1 *" value="${u.address}">
+                                        </c:forEach>
                                     </form>
                                 </div>
                                 <div class="form-two">
@@ -239,10 +312,12 @@
                                             <option>Canada</option>
                                             <option>Dubai</option>
                                         </select>
+                                        <c:forEach items="${requestScope.useraddress}" var="u">
                                         <input type="password" placeholder="Confirm password">
-                                        <input type="text" placeholder="Phone *">
+                                        Phone <input type="text" placeholder="Phone *" value="${u.phonenum}">
                                         <input type="text" placeholder="Mobile Phone">
                                         <input type="text" placeholder="Fax">
+                                        </c:forEach>
                                     </form>
                                 </div>
                             </div>
@@ -260,121 +335,7 @@
                     <h2>Review & Payment</h2>
                 </div>
 
-                <div class="table-responsive cart_info">
-                    <table class="table table-condensed">
-                        <thead>
-                            <tr class="cart_menu">
-                                <td class="image">Item</td>
-                                <td class="description"></td>
-                                <td class="price">Price</td>
-                                <td class="quantity">Quantity</td>
-                                <td class="total">Total</td>
-                                <td></td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="cart_product">
-                                    <a href=""><img src="images/cart/one.png" alt=""></a>
-                                </td>
-                                <td class="cart_description">
-                                    <h4><a href="">Colorblock Scuba</a></h4>
-                                    <p>Web ID: 1089772</p>
-                                </td>
-                                <td class="cart_price">
-                                    <p>$59</p>
-                                </td>
-                                <td class="cart_quantity">
-                                    <div class="cart_quantity_button">
-                                        <a class="cart_quantity_up" href=""> + </a>
-                                        <input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-                                        <a class="cart_quantity_down" href=""> - </a>
-                                    </div>
-                                </td>
-                                <td class="cart_total">
-                                    <p class="cart_total_price">$59</p>
-                                </td>
-                                <td class="cart_delete">
-                                    <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-                                </td>
-                            </tr>
 
-                            <tr>
-                                <td class="cart_product">
-                                    <a href=""><img src="images/cart/two.png" alt=""></a>
-                                </td>
-                                <td class="cart_description">
-                                    <h4><a href="">Colorblock Scuba</a></h4>
-                                    <p>Web ID: 1089772</p>
-                                </td>
-                                <td class="cart_price">
-                                    <p>$59</p>
-                                </td>
-                                <td class="cart_quantity">
-                                    <div class="cart_quantity_button">
-                                        <a class="cart_quantity_up" href=""> + </a>
-                                        <input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-                                        <a class="cart_quantity_down" href=""> - </a>
-                                    </div>
-                                </td>
-                                <td class="cart_total">
-                                    <p class="cart_total_price">$59</p>
-                                </td>
-                                <td class="cart_delete">
-                                    <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="cart_product">
-                                    <a href=""><img src="images/cart/three.png" alt=""></a>
-                                </td>
-                                <td class="cart_description">
-                                    <h4><a href="">Colorblock Scuba</a></h4>
-                                    <p>Web ID: 1089772</p>
-                                </td>
-                                <td class="cart_price">
-                                    <p>$59</p>
-                                </td>
-                                <td class="cart_quantity">
-                                    <div class="cart_quantity_button">
-                                        <a class="cart_quantity_up" href=""> + </a>
-                                        <input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-                                        <a class="cart_quantity_down" href=""> - </a>
-                                    </div>
-                                </td>
-                                <td class="cart_total">
-                                    <p class="cart_total_price">$59</p>
-                                </td>
-                                <td class="cart_delete">
-                                    <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="4">&nbsp;</td>
-                                <td colspan="2">
-                                    <table class="table table-condensed total-result">
-                                        <tr>
-                                            <td>Cart Sub Total</td>
-                                            <td>$59</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Exo Tax</td>
-                                            <td>$2</td>
-                                        </tr>
-                                        <tr class="shipping-cost">
-                                            <td>Shipping Cost</td>
-                                            <td>Free</td>										
-                                        </tr>
-                                        <tr>
-                                            <td>Total</td>
-                                            <td><span>$61</span></td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
                 <div class="payment-options">
                     <span>
                         <label><input type="checkbox"> Direct Bank Transfer</label>
