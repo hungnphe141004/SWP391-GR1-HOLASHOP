@@ -89,19 +89,19 @@ public class LoginController extends HttpServlet {
             session.setAttribute("user", user);
             response.sendRedirect("shiplist");
         }
-        if (user.getRole() == 3)//login success
+        else if (user.getRole() == 3)//login success
         {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
             response.sendRedirect("list");
-        
         } else {
             request.getSession().setAttribute("user", null);
-            PrintWriter pw = response.getWriter();
-            pw.println("<script type=\"text/javascript\">");
-            pw.println("alert('Invalid Username or Password');");
-            pw.println("</script>");
+            response.getWriter().println("Login failed!");
 
+//            PrintWriter pw = response.getWriter();
+//            pw.println("<script type=\"text/javascript\">");
+//            pw.println("alert('Invalid Username or Password');");
+//            pw.println("</script>");
         }
 
     }
