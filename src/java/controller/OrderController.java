@@ -6,6 +6,7 @@
 package controller;
 
 import connect.OrderDBContext;
+import connect.ShipDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Order;
-import model.OrderDetail;
+import model.ShipInfo;
 import model.User;
 
 /**
@@ -83,25 +84,37 @@ public class OrderController extends HttpServlet {
         String note = request.getParameter("message");
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        
+
         Order o = new Order();
         o.setUserId(user.getId());
         o.setTotalPrice(price);
         o.setNote(note);
-        
+
         OrderDBContext db = new OrderDBContext();
         db.insert(o);
-        
+
 //        OrderDetail detail = new OrderDetail();
 //        detail.setOrderid(db.getOrderId(user.getId()).getId());
 //        detail.setProduct_id(Integer.parseInt(request.getParameter("id")));
 //        detail.setProduct_name(request.getParameter("name"));
 //        detail.setPrice(Integer.parseInt(request.getParameter("price")));
 //        detail.setAmount(Integer.parseInt(request.getParameter("amount")));
+//        db.insertOrderDetail(detail);
+        ShipInfo ship = new ShipInfo();
+        ship.setOrderid(db.getOrderId(user.getId()).getId());
+        ship.setName(request.getParameter("cusname"));
+        ship.setAddress(request.getParameter("address"));
+        ship.setCityid(Integer.parseInt(request.getParameter("city")));
+        ship.setPhone(request.getParameter("phone"));
+        ship.setNote(request.getParameter("message"));
+        ship.setF0(Boolean.valueOf(request.getParameter("f0")));
         
+        ShipDBContext sdb = new ShipDBContext();
+        sdb.insert(ship);
+        
+
         db.delete(user.getId());
-        
-        
+
 //        db.insertOrderDetail(detail);
         response.sendRedirect("list");
     }

@@ -80,7 +80,7 @@ public abstract class BasedRequiredAuthenController extends HttpServlet {
         if (isAuthenticated(request)) {
             processGet(request, response);
         } else {
-            response.getWriter().println("Access Denied!");
+            response.sendRedirect("login");
         }
     }
 
@@ -104,7 +104,7 @@ public abstract class BasedRequiredAuthenController extends HttpServlet {
         if (isAuthenticated(request)) {
             processPost(request, response);
         } else {
-            response.getWriter().println("Access Denied!");
+            response.sendRedirect("login");
         };
     }
 

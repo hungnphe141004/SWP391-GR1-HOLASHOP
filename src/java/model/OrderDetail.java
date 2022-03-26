@@ -30,6 +30,7 @@ public class OrderDetail {
         this.amount = amount;
     }
 
+
     public int getOrderid() {
         return orderid;
     }
@@ -70,4 +71,6 @@ public class OrderDetail {
         this.amount = amount;
     }
 
+
+    
 }
