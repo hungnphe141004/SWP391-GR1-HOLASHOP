@@ -100,6 +100,18 @@
         <servlet-name>CheckOutController</servlet-name>
         <servlet-class>controller.CheckOutController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>OrderController</servlet-name>
+        <servlet-class>controller.OrderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShipListController</servlet-name>
+        <servlet-class>controller.ShipListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShipDetailController</servlet-name>
+        <servlet-class>controller.ShipDetailController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -199,6 +211,18 @@
     <servlet-mapping>
         <servlet-name>CheckOutController</servlet-name>
         <url-pattern>/checkout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderController</servlet-name>
+        <url-pattern>/order</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShipListController</servlet-name>
+        <url-pattern>/shiplist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShipDetailController</servlet-name>
+        <url-pattern>/shipdetail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

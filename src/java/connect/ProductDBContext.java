@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.AdminProduct;
 import model.Brand;
+import model.Cart;
 import model.Category;
 import model.Image;
 import model.Img;
@@ -771,6 +772,41 @@ public class ProductDBContext extends DBContext {
         } catch (SQLException ex) {
             Logger.getLogger(ProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    private PreparedStatement ps;
+    private ResultSet rs;
+    private String query;
+
+    public ArrayList<Cart> getCart(int id) {
+        ArrayList<Cart> list = new ArrayList<>();
+        try {
+            query = "SELECT [Order_ID]\n"
+                    + "      ,o.[ProductID]\n"
+                    + "      ,[ProductName]\n"
+                    + "      ,[ProductPrice]\n"
+                    + "      ,[Quantity]\n"
+                    + "	  ,[ProductImgUrl]\n"
+                    + "  FROM [Order_Detail] o \n"
+                    + "  inner join [ProductImg] p on o.[ProductId] = p.[ProductId]\n"
+                    + "  where [Order_ID] = ?";
+
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Cart c = new Cart();
+                c.setId(rs.getInt("ProductID"));
+                c.setName(rs.getString("ProductName"));
+                c.setPrice(rs.getInt("ProductPrice"));
+                c.setAmount(rs.getInt("Quantity"));
+                c.setImg(rs.getString("ProductImgURL"));
+                list.add(c);
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(ProductDBContext.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return list;
     }
 
     public static void main(String[] args) {

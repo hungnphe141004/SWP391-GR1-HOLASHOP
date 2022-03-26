@@ -5,21 +5,23 @@
  */
 package controller;
 
-import connect.ProductDBContext;
+import connect.OrderDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.AdminProduct;
+import javax.servlet.http.HttpSession;
+import model.Order;
+import model.OrderDetail;
+import model.User;
 
 /**
  *
  * @author PC
  */
-public class AdminListController extends HttpServlet {
+public class OrderController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +40,10 @@ public class AdminListController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AdminListController</title>");
+            out.println("<title>Servlet OrderController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AdminListController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet OrderController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,12 +61,11 @@ public class AdminListController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ProductDBContext db = new ProductDBContext();
-        ArrayList<AdminProduct> products = db.getAllProduct();
-        request.setAttribute("products", products);
-
-        request.getRequestDispatcher("/product/adminlist.jsp").forward(request, response);
-
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        OrderDBContext db = new OrderDBContext();
+        Order order = db.getOrderId(user.getId());
+        request.setAttribute("order", order);
     }
 
     /**
@@ -78,7 +79,31 @@ public class AdminListController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        int price = Integer.parseInt(request.getParameter("totalprice"));
+        String note = request.getParameter("message");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        
+        Order o = new Order();
+        o.setUserId(user.getId());
+        o.setTotalPrice(price);
+        o.setNote(note);
+        
+        OrderDBContext db = new OrderDBContext();
+        db.insert(o);
+        
+//        OrderDetail detail = new OrderDetail();
+//        detail.setOrderid(db.getOrderId(user.getId()).getId());
+//        detail.setProduct_id(Integer.parseInt(request.getParameter("id")));
+//        detail.setProduct_name(request.getParameter("name"));
+//        detail.setPrice(Integer.parseInt(request.getParameter("price")));
+//        detail.setAmount(Integer.parseInt(request.getParameter("amount")));
+        
+        db.delete(user.getId());
+        
+        
+//        db.insertOrderDetail(detail);
+        response.sendRedirect("list");
     }
 
     /**

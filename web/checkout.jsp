@@ -177,17 +177,19 @@
                             </tr>
                         </thead>
                         <tbody>
+                        <form action="order" method="Post">
                             <c:forEach items="${requestScope.carts}" var="c">
                                 <tr>
                                     <td class="cart_product">
                                         <a href=""><img src="${c.img}" alt="" style="width: 120px; height: 120px"></a>
                                     </td>
                                     <td class="cart_description">
-                                        <h4><a href="">${c.name}</a></h4>
+                                        <input type="hidden" name="id" value="${c.id}"/>
+                                        <h4><a href="">${c.name}</a><input type="hidden" name="name" value="${c.name}"/></h4>
                                         <p>Web ID: 1089772</p>
                                     </td>
                                     <td class="cart_price">
-                                        <p>${c.price}</p>
+                                        <p>${c.price}</p><input type="hidden" name="price" value="${c.price}"/>
                                     </td>
                                     <td class="cart_quantity">
                                         <div class="cart_quantity_button">
@@ -206,13 +208,14 @@
                             </c:forEach>
 
 
+
                             <tr>
                                 <td colspan="4">&nbsp;</td>
                                 <td colspan="2">
                                     <table class="table table-condensed total-result">
                                         <tr>
                                             <td>Cart Sub Total</td>
-                                            <td>${requestScope.totalPrice} VND</td>
+                                            <td>${requestScope.totalPrice}<input type="hidden" name="totalprice" value="${requestScope.totalPrice}"/> VND</td>
                                         </tr>
                                         <tr>
                                             <td>Exo Tax</td>
@@ -229,31 +232,13 @@
                                     </table>
                                 </td>
                             </tr>
-                        </tbody>
+                            </tbody>
                     </table>
                 </div>
 
-                <div class="step-one">
-                    <h2 class="heading">Step1</h2>
-                </div>
-                <div class="checkout-options">
-                    <h3>New User</h3>
-                    <p>Checkout options</p>
-                    <ul class="nav">
-                        <li>
-                            <label><input type="checkbox"> Register Account</label>
-                        </li>
-                        <li>
-                            <label><input type="checkbox"> Guest Checkout</label>
-                        </li>
-                        <li>
-                            <a href=""><i class="fa fa-times"></i>Cancel</a>
-                        </li>
-                    </ul>
-                </div><!--/checkout-options-->
 
                 <div class="register-req">
-                    <p>Please use Register And Checkout to easily get access to your order history, or use Checkout as Guest</p>
+                    <p>This page can only be accessed after logging in</p>
                 </div><!--/register-req-->
 
                 <div class="shopper-informations">
@@ -262,14 +247,10 @@
                             <div class="shopper-info">
                                 <p>Shipping Information</p>
 
-                                <form>
-                                    <input type="text" placeholder="Display Name">
-                                    <input type="text" placeholder="User Name">
-                                    <input type="password" placeholder="Password">
-                                    <input type="password" placeholder="Confirm password">
-                                </form>
-                                <a class="btn btn-primary" href="">Get Quotes</a>
-                                <a class="btn btn-primary" href="">Continue</a>
+
+                                Display Name<br/>
+                                <input type="text" placeholder="Display Name" value="${sessionScope.user.userName}" readonly="" class="form-one">
+
                             </div>
                         </div>
                         <div class="col-sm-5 clearfix">
@@ -277,48 +258,45 @@
                                 <p>Address</p>
 
                                 <div class="form-one">
-                                    <form>
-                                        <c:forEach items="${requestScope.useraddress}" var="u">
-                                            <input type="text" placeholder="Company Name">
-                                            <input type="text" placeholder="Email*">
-                                            <input type="text" placeholder="Title">
-                                            Name <input type="text" placeholder="Name *" value="${u.name}">
-                                            Address <input type="text" placeholder="Address 1 *" value="${u.address}">
-                                        </c:forEach>
-                                    </form>
+
+                                    <c:forEach items="${requestScope.useraddress}" var="u">
+                                        Email <br/>
+                                        <input type="text" placeholder="Email*"><br/>
+                                        Name<br/>
+                                        <input type="text" placeholder="Name *" value="${u.name}"><br/>
+                                        Address <input type="text" placeholder="Address 1 *" value="${u.address}">
+                                    </c:forEach>
+
                                 </div>
                                 <div class="form-two">
-                                    <form>
-                                        <input type="text" placeholder="Zip / Postal Code *">
-                                        <select>
-                                            <option>-- Country --</option>
-                                            <option>United States</option>
-                                            <option>Bangladesh</option>
-                                            <option>UK</option>
-                                            <option>India</option>
-                                            <option>Pakistan</option>
-                                            <option>Ucrane</option>
-                                            <option>Canada</option>
-                                            <option>Dubai</option>
-                                        </select>
-                                        <select>
-                                            <option>-- State / Province / Region --</option>
-                                            <option>United States</option>
-                                            <option>Bangladesh</option>
-                                            <option>UK</option>
-                                            <option>India</option>
-                                            <option>Pakistan</option>
-                                            <option>Ucrane</option>
-                                            <option>Canada</option>
-                                            <option>Dubai</option>
-                                        </select>
-                                        <c:forEach items="${requestScope.useraddress}" var="u">
-                                        <input type="password" placeholder="Confirm password">
-                                        Phone <input type="text" placeholder="Phone *" value="${u.phonenum}">
-                                        <input type="text" placeholder="Mobile Phone">
-                                        <input type="text" placeholder="Fax">
-                                        </c:forEach>
-                                    </form>
+                                    Country <br/>
+                                    <select>
+                                        <option>-- Country --</option>
+                                        <option>United States</option>
+                                        <option>Bangladesh</option>
+                                        <option>UK</option>
+                                        <option>India</option>
+                                        <option>Pakistan</option>
+                                        <option>Ucrane</option>
+                                        <option>Canada</option>
+                                        <option>Dubai</option>
+                                    </select>
+                                    State <br/>
+                                    <select>
+                                        <option>-- State / Province / Region --</option>
+                                        <option>United States</option>
+                                        <option>Bangladesh</option>
+                                        <option>UK</option>
+                                        <option>India</option>
+                                        <option>Pakistan</option>
+                                        <option>Ucrane</option>
+                                        <option>Canada</option>
+                                        <option>Dubai</option>
+                                    </select>
+                                    <c:forEach items="${requestScope.useraddress}" var="u">
+                                        Phone <br/> <input type="text" placeholder="Phone *" value="${u.phonenum}">
+                                    </c:forEach>
+
                                 </div>
                             </div>
                         </div>
@@ -331,9 +309,12 @@
                         </div>					
                     </div>
                 </div>
+                <input type="submit" value="Order" class="btn btn-primary"/>
+                </form>
                 <div class="review-payment">
                     <h2>Review & Payment</h2>
                 </div>
+
 
 
                 <div class="payment-options">

@@ -53,32 +53,32 @@ public class OrderDAO extends DBContext {
             Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public ArrayList<Order> getAllOrder() {
-        
-        ArrayList<Order> list = new ArrayList<>();
-        try {
-            String query = "select o.ID , o.UserID , o.TotalPrice , o.Note , o.Status , o.Date , d.Order_ID , d.ProductID , d.ProductName  ,d.ProductPrice , d.Quantity from Orders o\n"
-                + "join Order_Detail d on d.Order_ID = o.ID\n";
-            PreparedStatement stm = connection.prepareStatement(query);
-            ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                list.add(new Order(
-                        rs.getInt(1),
-                        rs.getInt(2),
-                        rs.getInt(3),
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getDate(6),
-                        rs.getInt(7),
-                        rs.getInt(8),
-                        rs.getString(9),
-                        rs.getInt(10),
-                        rs.getInt(11)
-                ));
-            }
-        } catch (Exception e) {
-        }
-        return list;
-    }
+//    public ArrayList<Order> getAllOrder() {
+//        
+//        ArrayList<Order> list = new ArrayList<>();
+//        try {
+//            String query = "select o.ID , o.UserID , o.TotalPrice , o.Note , o.Status , o.Date , d.Order_ID , d.ProductID , d.ProductName  ,d.ProductPrice , d.Quantity from Orders o\n"
+//                + "join Order_Detail d on d.Order_ID = o.ID\n";
+//            PreparedStatement stm = connection.prepareStatement(query);
+//            ResultSet rs = stm.executeQuery();
+//            while (rs.next()) {
+//                list.add(new Order(
+//                        rs.getInt(1),
+//                        rs.getInt(2),
+//                        rs.getInt(3),
+//                        rs.getString(4),
+//                        rs.getString(5),
+//                        rs.getDate(6),
+//                        rs.getInt(7),
+//                        rs.getInt(8),
+//                        rs.getString(9),
+//                        rs.getInt(10),
+//                        rs.getInt(11)
+//                ));
+//            }
+//        } catch (Exception e) {
+//        }
+//        return list;
+//    }
 
 }

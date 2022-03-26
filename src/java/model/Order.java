@@ -6,14 +6,13 @@
 package model;
 
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 
 /**
  *
- * @author BEAN
+ * @author pc
  */
-public class Order extends OrderDetail {
-    
+public class Order {
+
     private int id;
     private int userId;
     private int totalPrice;
@@ -24,12 +23,6 @@ public class Order extends OrderDetail {
     public Order() {
     }
 
-    public Order(int userId, int totalPrice, String note) {
-        this.userId = userId;
-        this.totalPrice = totalPrice;
-        this.note = note;
-    }
-
     public Order(int id, int userId, int totalPrice, String note, String status, Date date) {
         this.id = id;
         this.userId = userId;
@@ -38,25 +31,6 @@ public class Order extends OrderDetail {
         this.status = status;
         this.date = date;
     }
-
-    public Order(int id, int userId, int totalPrice, String note, String status, Date date, int orderID, int productID, String productName, int  productPrice, int quantity) {
-        super(orderID, productID, productName, productPrice, quantity);
-        this.id = id;
-        this.userId = userId;
-        this.totalPrice = totalPrice;
-        this.note = note;
-        this.status = status;
-        this.date = date;
-    }
-
-    public Order(int id, String status, int totalPrice, Date date) {
-        this.id = id;
-        this.totalPrice = totalPrice;
-        this.status = status;
-        this.date = date;
-    }
-
-    
 
     public int getId() {
         return id;
@@ -98,58 +72,12 @@ public class Order extends OrderDetail {
         this.status = status;
     }
 
-    public String getDate() {
-        SimpleDateFormat df=new SimpleDateFormat("dd-MM-YYYY");
-        return df.format(date);
+    public Date getDate() {
+        return date;
     }
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public int getOrderID() {
-        return orderID;
-    }
-
-    public void setOrderID(int orderID) {
-        this.orderID = orderID;
-    }
-
-    public int getProductID() {
-        return productID;
-    }
-
-    public void setProductID(int productID) {
-        this.productID = productID;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public double getProductPrice() {
-        return productPrice;
-    }
-
-    public void setProductPrice(int productPrice) {
-        this.productPrice = productPrice;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    @Override
-    public String toString() {
-        return "Order{" + "id=" + id + ", userId=" + userId + ", totalPrice=" + totalPrice + ", note=" + note + ", status=" + status + ", date=" + date + '}';
     }
 
 }

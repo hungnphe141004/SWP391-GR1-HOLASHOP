@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.User;
 
 /**
@@ -76,20 +77,33 @@ public class LoginController extends HttpServlet {
         String password = request.getParameter("password");
         LoginDAO db = new LoginDAO();
         User user = db.getAccountByUserAndPass(username, password);
-        if (user != null)//login success
+        if (user.getRole() == 1)//login success
         {
-
-            request.getSession().setAttribute("user", user);
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
+            response.sendRedirect("admin/list");
+        }
+        if (user.getRole() == 5)//login success
+        {
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
+            response.sendRedirect("shiplist");
+        }
+        if (user.getRole() == 3)//login success
+        {
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
             response.sendRedirect("list");
-
+        
         } else {
             request.getSession().setAttribute("user", null);
             PrintWriter pw = response.getWriter();
             pw.println("<script type=\"text/javascript\">");
             pw.println("alert('Invalid Username or Password');");
             pw.println("</script>");
-            
+
         }
+
     }
 
     /**

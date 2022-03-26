@@ -61,8 +61,8 @@ public class ViewOrderController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         OrderDAO dao = new OrderDAO();
-        ArrayList<Order> list = dao.getAllOrder();
-        request.setAttribute("listOrder", list);
+//        ArrayList<Order> list = dao.getAllOrder();
+//        request.setAttribute("listOrder", list);
         request.getRequestDispatcher("orderhistory.jsp").forward(request, response);
     }
 

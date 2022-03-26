@@ -10,6 +10,7 @@ package model;
  * @author PC
  */
 public class Cart {
+
     private String name;
     private int id;
     private String img;
@@ -40,8 +41,6 @@ public class Cart {
         this.img = img;
     }
 
-   
-
     public int getAmount() {
         return amount;
     }
@@ -68,8 +67,5 @@ public class Cart {
 
     public Cart() {
     }
-    
-    
-    
-    
+
 }

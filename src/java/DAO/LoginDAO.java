@@ -22,7 +22,7 @@ public class LoginDAO extends DBContext {
 
     public User getAccountByUserAndPass(String username, String password) {
         try {
-            String sql = "select u.UserID, u.Username, u.Password, u.email,\n"
+            String sql = "select u.UserID, u.Username, u.Password, u.email, u.RoleID,\n"
                     + "f.fid, f.url\n"
                     + "from Users u left join GroupAccount ga on u.Username = ga.username\n"
                     + "left join [Role] r on r.RoleID = ga.gid\n"
@@ -41,6 +41,7 @@ public class LoginDAO extends DBContext {
                 user.setUserName(username);
                 user.setPassword(password);
                 user.setId(Integer.parseInt(rs.getString("UserID")));
+                user.setRole(Integer.parseInt(rs.getString("RoleID")));
                 }
                 int fid = rs.getInt("fid");
                 if(fid !=0)
