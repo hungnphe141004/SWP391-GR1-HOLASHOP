@@ -13,7 +13,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        Hello: ${sessionScope.user.username}<br/>
+        Hello: ${sessionScope.user.userName}<br/>
         <table border="1px" style="text-align: center">
             <tr>
                 <td>Order Id</td>

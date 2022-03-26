@@ -40,7 +40,7 @@ public class ShipListController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ShipListController</title>");            
+            out.println("<title>Servlet ShipListController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ShipListController at " + request.getContextPath() + "</h1>");
@@ -64,7 +64,7 @@ public class ShipListController extends HttpServlet {
         ShipDBContext db = new ShipDBContext();
         ArrayList<Ship> ship = db.getAllShip1();
         request.setAttribute("ship", ship);
-        
+
         ArrayList<Ship> ship1 = db.getAllShip();
         request.setAttribute("ship1", ship1);
 
