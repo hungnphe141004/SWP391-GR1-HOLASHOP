@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Ship;
+import model.ShipInfo;
 
 /**
  *
@@ -54,7 +55,7 @@ public class ShipDBContext extends DBContext {
         }
         return ship;
     }
-    
+
     public void update(Ship ship) {
         try {
             String sql = "UPDATE [ShipInfo]\n"
@@ -70,7 +71,7 @@ public class ShipDBContext extends DBContext {
             Logger.getLogger(ShipDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public ArrayList<Ship> getAllShip1() {
         ArrayList<Ship> ship = new ArrayList<>();
         try {
@@ -106,7 +107,7 @@ public class ShipDBContext extends DBContext {
         }
         return ship;
     }
-    
+
     public Ship get(int id) {
 
         try {
@@ -140,9 +141,53 @@ public class ShipDBContext extends DBContext {
         }
         return null;
     }
-    
+
+    public void insert(ShipInfo info) {
+        try {
+            String sql = "INSERT INTO [ShipInfo]\n"
+                    + "           ([Order_ID]\n"
+                    + "           ,[CustomerName]\n"
+                    + "           ,[ShippingAddress]\n"
+                    + "           ,[ShipCityID]\n"
+                    + "           ,[PhoneNum]\n"
+                    + "           ,[Note]\n"
+                    + "           ,[Delivered]\n"
+                    + "           ,[f0])\n"
+                    + "     VALUES\n"
+                    + "           (?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,'false'\n"
+                    + "           ,?)";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, info.getOrderid());
+            stm.setString(2, info.getName());
+            stm.setString(3, info.getAddress());
+            stm.setInt(4, info.getCityid());
+            stm.setString(5, info.getPhone());
+            stm.setString(6, info.getNote());
+            stm.setBoolean(7, info.isF0());
+
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ShipDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public static void main(String[] args) {
-        ShipDBContext db = new ShipDBContext();
-        System.out.println(db.get(0));
+//        ShipDBContext db = new ShipDBContext();
+//        ShipInfo s = new ShipInfo();
+//        s.setOrderid(2);
+//        s.setName("Haku");
+//        s.setAddress("Hai phong");
+//        s.setCityid(12);
+//        s.setPhone("(+84) 82828292");
+//        s.setNote("");
+//        s.setF0(true);
+//
+//        db.insert(s);
     }
 }

@@ -227,7 +227,7 @@
                                                 <img src="${s.img.image}" alt="" style="width:140px; height: 140px" />
                                                 <h2>${s.price}VND</h2>
                                                 <p><a href="detail?ProID=${s.product_id}">${s.product_name}</a></p>
-                                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                <a href="addtocart?ProID=${s.product_id}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                             </div>
 
                                         </div>

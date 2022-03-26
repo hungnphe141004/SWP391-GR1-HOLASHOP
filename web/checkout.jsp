@@ -186,7 +186,7 @@
                                     <td class="cart_description">
                                         <input type="hidden" name="id" value="${c.id}"/>
                                         <h4><a href="">${c.name}</a><input type="hidden" name="name" value="${c.name}"/></h4>
-                                        <p>Web ID: 1089772</p>
+                                        <p>Web ID: ${c.id}</p>
                                     </td>
                                     <td class="cart_price">
                                         <p>${c.price}</p><input type="hidden" name="price" value="${c.price}"/>
@@ -219,15 +219,15 @@
                                         </tr>
                                         <tr>
                                             <td>Exo Tax</td>
-                                            <td>$2</td>
+                                            <td>0 VND</td>
                                         </tr>
                                         <tr class="shipping-cost">
                                             <td>Shipping Cost</td>
-                                            <td>Free</td>										
+                                            <td>30000 VND</td>										
                                         </tr>
                                         <tr>
                                             <td>Total</td>
-                                            <td><span>$61</span></td>
+                                            <td><span>${requestScope.totalPrice + 30000} VND</span></td>
                                         </tr>
                                     </table>
                                 </td>
@@ -263,15 +263,17 @@
                                         Email <br/>
                                         <input type="text" placeholder="Email*"><br/>
                                         Name<br/>
-                                        <input type="text" placeholder="Name *" value="${u.name}"><br/>
-                                        Address <input type="text" placeholder="Address 1 *" value="${u.address}">
+                                        <input type="text" placeholder="Name *" name="cusname" value="${u.name}"><br/>
+                                        Address <input type="text" placeholder="Address 1 *" name="address" value="${u.address}">
                                     </c:forEach>
 
                                 </div>
                                 <div class="form-two">
                                     Country <br/>
                                     <select>
-                                        <option>-- Country --</option>
+
+                                        <option>Country</option>
+                                        <option>Viet Nam</option>
                                         <option>United States</option>
                                         <option>Bangladesh</option>
                                         <option>UK</option>
@@ -282,19 +284,13 @@
                                         <option>Dubai</option>
                                     </select>
                                     State <br/>
-                                    <select>
-                                        <option>-- State / Province / Region --</option>
-                                        <option>United States</option>
-                                        <option>Bangladesh</option>
-                                        <option>UK</option>
-                                        <option>India</option>
-                                        <option>Pakistan</option>
-                                        <option>Ucrane</option>
-                                        <option>Canada</option>
-                                        <option>Dubai</option>
+                                    <select name="city"> 
+                                        <c:forEach items="${requestScope.adds}" var="a">
+                                            <option value="${a.id}">${a.cityname}</option>
+                                        </c:forEach>
                                     </select>
                                     <c:forEach items="${requestScope.useraddress}" var="u">
-                                        Phone <br/> <input type="text" placeholder="Phone *" value="${u.phonenum}">
+                                        Phone <br/> <input type="text" placeholder="Phone *" name="phone" value="${u.phonenum}">
                                     </c:forEach>
 
                                 </div>
@@ -302,9 +298,9 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="order-message">
-                                <p>Shipping Order</p>
+                                <p>Shipping Note</p>
                                 <textarea name="message"  placeholder="Notes about your order, Special Notes for Delivery" rows="16"></textarea>
-                                <label><input type="checkbox"> Shipping to bill address</label>
+                                <label><input type="checkbox" name="f0"> At risk of contracting covid</label>
                             </div>	
                         </div>					
                     </div>
