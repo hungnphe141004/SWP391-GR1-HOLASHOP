@@ -37,8 +37,8 @@
         <servlet-class>controller.DeleteOrderController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>UpdateOrderController</servlet-name>
-        <servlet-class>controller.UpdateOrderController</servlet-class>
+        <servlet-name>OrderDetailController</servlet-name>
+        <servlet-class>controller.OrderDetailController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SearchByCatesController</servlet-name>
@@ -149,8 +149,8 @@
         <url-pattern>/delete</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>UpdateOrderController</servlet-name>
-        <url-pattern>/updateOrder</url-pattern>
+        <servlet-name>OrderDetailController</servlet-name>
+        <url-pattern>/detailOrder</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SearchByCatesController</servlet-name>

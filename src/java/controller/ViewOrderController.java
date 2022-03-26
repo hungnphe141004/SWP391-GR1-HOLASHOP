@@ -5,11 +5,10 @@
  */
 package controller;
 
-import DAO.OrderDAO;
+import connect.OrderDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -60,9 +59,10 @@ public class ViewOrderController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        OrderDAO dao = new OrderDAO();
-//        ArrayList<Order> list = dao.getAllOrder();
-//        request.setAttribute("listOrder", list);
+        OrderDBContext db = new OrderDBContext();
+        ArrayList<Order> orders = db.getAllOrder();
+        request.setAttribute("orders", orders);
+        
         request.getRequestDispatcher("orderhistory.jsp").forward(request, response);
     }
 
