@@ -154,71 +154,26 @@
                 </div>
             </div><!--/header-bottom-->
         </header><!--/header-->
-        <div class="container">
-            <div class="breadcrumbs">
-                <ol class="breadcrumb">
-                    <li><a href="admincommand.jsp">Back</a></li>
-                    <li class="active">Order History</li>
-                </ol>
-            </div>
-        </div>
+
 
 
         <div class="row">
             <div class="col-md-12 mb-3">
                 <div class="card">
                     <div class="card-header">
-                        <h1 style="text-align: center">Order Dashboard</h1> 
+                        <h1 style="text-align: center">Admin Command</h1> 
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table width="80%" border="1" style="margin: auto">
-
-                                <tr>
-                                    <th>ID</th>
-                                    <th>User ID</th>
-                                    <th>Total price</th>
-                                    <th>Note</th>
-                                    <th>Status</th>
-                                    <th>Date</th>
-                                    <th>Delete</th>
-                                    <th>Detail</th>
-                                </tr>
-
-
-                                <c:forEach items="${requestScope.orders}" var="o">
-                                    <tr>
-                                        <td>${o.id}</td>
-                                        <td>${o.userId}</td>
-                                        <td>${o.totalPrice}</td>
-                                        <td>${o.note}</td>
-                                        <c:if test="${o.status == 1}">
-                                            <td><span class="badge rounded-pill bg-secondary">Waiting for Confirmation</span></td>
-                                        </c:if>
-                                        <c:if test="${o.status == 2}">
-                                            <td><span class="badge rounded-pill bg-warning text-dark">Packing</span></td>
-                                        </c:if>
-                                        <c:if test="${o.status == 3}">
-                                            <td><span class="badge rounded-pill bg-primary">Delivering</span></td>
-                                        </c:if>
-                                        <c:if test="${o.status == 4}">
-                                            <td><span class="badge bg-danger">Canceled</span></td>
-                                        </c:if>
-                                        <c:if test="${o.status == 5}">
-                                            <td><span class="badge bg-success">completed</span></td>
-                                        </c:if>
-                                        <td>${o.date}</td>
-
-                                        <td>
-                                            <input type="button" onclick="showMess(${o.id});" value="Delete"/>
-                                        </td>
-                                        <td><a href="detailOrder?id=${o.id}">Detail</a></td>
-
-                                    </tr>
-                                </c:forEach>
-
-                            </table>
-                        </div>
+                        <a href="admin/list">
+                            <button style="width: 150px; margin-left:200px"
+                                    class="mt-5 text-center btn btn-primary profile-button" type="submit">Product Manage
+                            </button>
+                        </a>
+                        <a href="viewOrder">
+                            <button style="width: 150px; margin-left:200px"
+                                    class="mt-5 text-center btn btn-primary profile-button" type="submit">Order Manage
+                            </button> 
+                        </a>
                     </div>
                 </div>
             </div>
@@ -392,14 +347,14 @@
         <script src="js/main.js"></script>
     </body>
     <script>
-                                                function  showMess(id) {
-                                                    {
-                                                        var c = confirm("Are you sure?");
-                                                        if (c)
-                                                        {
-                                                            window.location.href = "delete?id=" + id;
-                                                        }
-                                                    }
-                                                }
+        function  showMess(id) {
+            {
+                var c = confirm("Are you sure?");
+                if (c)
+                {
+                    window.location.href = "delete?id=" + id;
+                }
+            }
+        }
     </script>
 </html>

@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Desktop/EndGame/SWP391-GR1-HOLASHOP/web/UserProfile.jsp</file>
-            <file>file:/D:/Desktop/EndGame/SWP391-GR1-HOLASHOP/src/java/connect/OrderDBContext.java</file>
-            <file>file:/D:/Desktop/EndGame/SWP391-GR1-HOLASHOP/src/java/controller/OrderController.java</file>
-            <file>file:/D:/Desktop/EndGame/SWP391-GR1-HOLASHOP/web/checkout.jsp</file>
-            <file>file:/D:/Desktop/EndGame/SWP391-GR1-HOLASHOP/src/java/connect/ProductDBContext.java</file>
-            <file>file:/D:/Desktop/EndGame/SWP391-GR1-HOLASHOP/src/java/connect/CartDBContext.java</file>
+            <file>file:/D:/Desktop/EndGame/SWP391-GR1-HOLASHOP/web/orderhistory.jsp</file>
+            <file>file:/D:/Desktop/EndGame/SWP391-GR1-HOLASHOP/src/java/controller/LoginController.java</file>
+            <file>file:/D:/Desktop/EndGame/SWP391-GR1-HOLASHOP/web/admincommand.jsp</file>
+            <file>file:/D:/Desktop/EndGame/SWP391-GR1-HOLASHOP/web/product/adminlist.jsp</file>
         </group>
     </open-files>
 </project-private>

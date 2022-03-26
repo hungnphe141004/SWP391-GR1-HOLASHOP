@@ -154,14 +154,7 @@
                 </div>
             </div><!--/header-bottom-->
         </header><!--/header-->
-        <div class="container">
-            <div class="breadcrumbs">
-                <ol class="breadcrumb">
-                    <li><a href="admincommand.jsp">Back</a></li>
-                    <li class="active">Order History</li>
-                </ol>
-            </div>
-        </div>
+
 
 
         <div class="row">
@@ -181,41 +174,39 @@
                                     <th>Note</th>
                                     <th>Status</th>
                                     <th>Date</th>
-                                    <th>Delete</th>
-                                    <th>Detail</th>
+                                    <th>Name</th>
+                                    <th>Address</th>
+                                    <th>Phone</th>
                                 </tr>
 
 
-                                <c:forEach items="${requestScope.orders}" var="o">
-                                    <tr>
-                                        <td>${o.id}</td>
-                                        <td>${o.userId}</td>
-                                        <td>${o.totalPrice}</td>
-                                        <td>${o.note}</td>
-                                        <c:if test="${o.status == 1}">
-                                            <td><span class="badge rounded-pill bg-secondary">Waiting for Confirmation</span></td>
-                                        </c:if>
-                                        <c:if test="${o.status == 2}">
-                                            <td><span class="badge rounded-pill bg-warning text-dark">Packing</span></td>
-                                        </c:if>
-                                        <c:if test="${o.status == 3}">
-                                            <td><span class="badge rounded-pill bg-primary">Delivering</span></td>
-                                        </c:if>
-                                        <c:if test="${o.status == 4}">
-                                            <td><span class="badge bg-danger">Canceled</span></td>
-                                        </c:if>
-                                        <c:if test="${o.status == 5}">
-                                            <td><span class="badge bg-success">completed</span></td>
-                                        </c:if>
-                                        <td>${o.date}</td>
 
-                                        <td>
-                                            <input type="button" onclick="showMess(${o.id});" value="Delete"/>
-                                        </td>
-                                        <td><a href="detailOrder?id=${o.id}">Detail</a></td>
+                                <tr>
+                                    <td>${requestScope.order.id}</td>
+                                    <td>${requestScope.order.userId}</td>
+                                    <td>${requestScope.order.totalPrice}</td>
+                                    <td>${requestScope.order.note}</td>
+                                    <c:if test="${requestScope.order.status == 1}">
+                                        <td><span class="badge rounded-pill bg-secondary">Waiting for Confirmation</span></td>
+                                    </c:if>
+                                    <c:if test="${requestScope.order.status == 2}">
+                                        <td><span class="badge rounded-pill bg-warning text-dark">Packing</span></td>
+                                    </c:if>
+                                    <c:if test="${requestScope.order.status == 3}">
+                                        <td><span class="badge rounded-pill bg-primary">Delivering</span></td>
+                                    </c:if>
+                                    <c:if test="${requestScope.order.status == 4}">
+                                        <td><span class="badge bg-danger">Canceled</span></td>
+                                    </c:if>
+                                    <c:if test="${requestScope.order.status == 5}">
+                                        <td><span class="badge bg-success">completed</span></td>
+                                    </c:if>
+                                    <td>${requestScope.order.date}</td>
+                                    <td>${requestScope.order.name}</td>
+                                    <td>${requestScope.order.address}</td>
+                                    <td>${requestScope.order.phone}</td>
+                                </tr>
 
-                                    </tr>
-                                </c:forEach>
 
                             </table>
                         </div>
@@ -392,14 +383,14 @@
         <script src="js/main.js"></script>
     </body>
     <script>
-                                                function  showMess(id) {
-                                                    {
-                                                        var c = confirm("Are you sure?");
-                                                        if (c)
-                                                        {
-                                                            window.location.href = "delete?id=" + id;
-                                                        }
-                                                    }
-                                                }
+        function  showMess(id) {
+            {
+                var c = confirm("Are you sure?");
+                if (c)
+                {
+                    window.location.href = "delete?id=" + id;
+                }
+            }
+        }
     </script>
 </html>

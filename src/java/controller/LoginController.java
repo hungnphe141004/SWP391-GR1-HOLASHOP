@@ -89,7 +89,7 @@ public class LoginController extends HttpServlet {
         {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
-            response.sendRedirect("admin/list");
+            response.sendRedirect("admincommand.jsp");
         } else if (user.getRole() == 5)//login success
         {
             HttpSession session = request.getSession();

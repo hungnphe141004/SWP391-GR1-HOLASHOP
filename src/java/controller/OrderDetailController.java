@@ -5,18 +5,20 @@
  */
 package controller;
 
+import connect.OrderDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Order;
 
 /**
  *
  * @author PC
  */
-public class UpdateOrderController extends HttpServlet {
+public class OrderDetailController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -56,7 +58,13 @@ public class UpdateOrderController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        int id = Integer.parseInt(request.getParameter("id"));
+        OrderDBContext db = new OrderDBContext();
+        Order order = db.getOrderById(id);
+        request.setAttribute("order", order);
+        
+        request.getRequestDispatcher("updateorder.jsp").forward(request, response);
     }
 
     /**

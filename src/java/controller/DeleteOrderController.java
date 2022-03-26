@@ -6,6 +6,7 @@
 package controller;
 
 import DAO.OrderDAO;
+import connect.OrderDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -36,7 +37,7 @@ public class DeleteOrderController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DeleteOrderController</title>");            
+            out.println("<title>Servlet DeleteOrderController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet DeleteOrderController at " + request.getContextPath() + "</h1>");
@@ -57,8 +58,10 @@ public class DeleteOrderController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        OrderDAO db = new OrderDAO();
-        db.deleteOrder(Integer.parseInt(request.getParameter("id")));
+        OrderDBContext db = new OrderDBContext();
+        int id = Integer.parseInt(request.getParameter("id"));
+        db.deleteOrder(id);
+
         response.sendRedirect("viewOrder");
     }
 
