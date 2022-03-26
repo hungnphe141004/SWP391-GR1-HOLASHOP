@@ -5,7 +5,8 @@
  */
 package controller;
 
-import connect.CartDBContext;
+import connect.ProductDBContext;
+import connect.ShipDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -15,13 +16,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Cart;
+import model.Ship;
 import model.User;
 
 /**
  *
  * @author PC
  */
-public class UserCartController extends BasedRequiredAuthenController {
+public class ShipDetailController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,25 +37,19 @@ public class UserCartController extends BasedRequiredAuthenController {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        
-        HttpSession session = request.getSession();
-        User user=(User) session.getAttribute("user");
-        CartDBContext cdb = new CartDBContext();
-        List<Cart> carts = cdb.getCart(user.getId());
-        int totalPrice = 0;
-        for(Cart cart:carts){
-            totalPrice += cart.getPrice()*cart.getAmount();
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ShipDetailController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ShipDetailController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-        request.setAttribute("totalPrice", totalPrice);
-        request.setAttribute("carts", carts);
-        
-        PrintWriter out = response.getWriter();
-       
-     
-        request.getRequestDispatcher("cart.jsp").forward(request, response);
-        }
-    
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -65,9 +61,18 @@ public class UserCartController extends BasedRequiredAuthenController {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void processGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        int id = Integer.parseInt(request.getParameter("id"));
+        ShipDBContext db = new ShipDBContext();
+        Ship ship = db.get(id);
+        request.setAttribute("ship", ship);
+        
+        ProductDBContext pdb = new ProductDBContext();
+        List<Cart> carts = pdb.getCart(id);
+        request.setAttribute("carts", carts);
+        
+        request.getRequestDispatcher("saveship.jsp").forward(request, response);
     }
 
     /**
@@ -79,9 +84,24 @@ public class UserCartController extends BasedRequiredAuthenController {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void processPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        
+        String deli = request.getParameter("deli");
+        Ship s = new Ship();
+        s.setOrderid(Integer.parseInt(request.getParameter("id")));
+        s.setDeli(request.getParameter("deli").equals("take"));
+        if (deli.equals("take")) {
+            s.setShipper(user.getUserName());
+        } else {
+            s.setShipper("");
+        }
+        ShipDBContext db = new ShipDBContext();
+        db.update(s);
+        
+        response.sendRedirect("shiplist");
     }
 
     /**

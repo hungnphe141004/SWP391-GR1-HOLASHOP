@@ -17,6 +17,7 @@ public class User {
     private String userName;
     private String password;
     private String email;
+    private int role;
     private ArrayList<Feature> features = new ArrayList<>();
 
     public User() {
@@ -38,10 +39,12 @@ public class User {
         this.id = id;
     }
 
-    public User(String userName, String password, String email) {
+    public User(int id, String userName, String password, String email, int role) {
+        this.id = id;
         this.userName = userName;
         this.password = password;
         this.email = email;
+        this.role = role;
     }
 
     public String getUserName() {
@@ -66,6 +69,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
     }
 
     @Override

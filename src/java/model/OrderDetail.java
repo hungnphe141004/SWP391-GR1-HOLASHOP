@@ -9,62 +9,65 @@ package model;
  *
  * @author BEAN
  */
-public class OrderDetail extends ProductDetailImg {
+public class OrderDetail {
 
-    int orderID;
-    String productName;
-    int productPrice;
-    int quantity;
+
+    private int orderid;
+    private int product_id;
+    private String product_name;
+    private int price;
+    private int amount;
 
     public OrderDetail() {
     }
 
-    public OrderDetail(int orderID, int productID, String productName, int productPrice, int quantity) {
-        this.orderID = orderID;
-        this.productID = productID;
-        this.productName = productName;
-        this.productPrice = productPrice;
-        this.quantity = quantity;
+    public OrderDetail( int orderid, int product_id, String product_name, int price, int amount) {
+
+        this.orderid = orderid;
+        this.product_id = product_id;
+        this.product_name = product_name;
+        this.price = price;
+        this.amount = amount;
     }
 
-    public OrderDetail(int productId, String productName, String productImgURL, int ProductPrice, int quantity) {
-        this.productID=productId;
-        this.productName = productName;
-        this.productImgURL=productImgURL;
-        this.productPrice=ProductPrice;
-        this.quantity=quantity;
+    public int getOrderid() {
+        return orderid;
     }
 
-    public int getOrderID() {
-        return orderID;
+    public void setOrderid(int orderid) {
+        this.orderid = orderid;
     }
 
-    public void setOrderID(int orderID) {
-        this.orderID = orderID;
+    public int getProduct_id() {
+        return product_id;
     }
 
-    public String getProductName() {
-        return productName;
+    public void setProduct_id(int product_id) {
+        this.product_id = product_id;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public String getProduct_name() {
+        return product_name;
     }
 
-    public double getProductPrice() {
-        return productPrice;
+    public void setProduct_name(String product_name) {
+        this.product_name = product_name;
     }
 
-    public void setProductPrice(int productPrice) {
-        this.productPrice = productPrice;
+    public int getPrice() {
+        return price;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public void setPrice(int price) {
+        this.price = price;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
 }

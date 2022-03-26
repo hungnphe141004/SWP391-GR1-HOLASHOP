@@ -5,23 +5,23 @@
  */
 package controller;
 
-import connect.CartDBContext;
+import connect.ShipDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Cart;
+import model.Ship;
 import model.User;
 
 /**
  *
  * @author PC
  */
-public class UserCartController extends BasedRequiredAuthenController {
+public class ShipListController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,25 +35,19 @@ public class UserCartController extends BasedRequiredAuthenController {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        
-        HttpSession session = request.getSession();
-        User user=(User) session.getAttribute("user");
-        CartDBContext cdb = new CartDBContext();
-        List<Cart> carts = cdb.getCart(user.getId());
-        int totalPrice = 0;
-        for(Cart cart:carts){
-            totalPrice += cart.getPrice()*cart.getAmount();
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ShipListController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ShipListController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-        request.setAttribute("totalPrice", totalPrice);
-        request.setAttribute("carts", carts);
-        
-        PrintWriter out = response.getWriter();
-       
-     
-        request.getRequestDispatcher("cart.jsp").forward(request, response);
-        }
-    
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -65,9 +59,16 @@ public class UserCartController extends BasedRequiredAuthenController {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void processGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        ShipDBContext db = new ShipDBContext();
+        ArrayList<Ship> ship = db.getAllShip1();
+        request.setAttribute("ship", ship);
+        
+        ArrayList<Ship> ship1 = db.getAllShip();
+        request.setAttribute("ship1", ship1);
+
+        request.getRequestDispatcher("shiplist.jsp").forward(request, response);
     }
 
     /**
@@ -79,7 +80,7 @@ public class UserCartController extends BasedRequiredAuthenController {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void processPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
