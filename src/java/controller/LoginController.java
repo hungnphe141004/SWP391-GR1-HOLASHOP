@@ -77,33 +77,35 @@ public class LoginController extends HttpServlet {
         String password = request.getParameter("password");
         LoginDAO db = new LoginDAO();
         User user = db.getAccountByUserAndPass(username, password);
-        if (user.getRole() == 1)//login success
+        if (user == null)//login success
+        {
+            HttpSession session = request.getSession();
+            session.setAttribute("user", null);
+            PrintWriter pw = response.getWriter();
+            pw.println("<script type=\"text/javascript\">");
+            pw.println("alert('Invalid Username or Password');");
+            pw.println("</script>");
+        } else if (user.getRole() == 1)//login success
         {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
             response.sendRedirect("admin/list");
-        }
-        if (user.getRole() == 5)//login success
+        } else if (user.getRole() == 5)//login success
         {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
             response.sendRedirect("shiplist");
-        }
-        else if (user.getRole() == 3)//login success
+        } else if (user.getRole() == 3)//login success
         {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
             response.sendRedirect("list");
-        } else {
-            request.getSession().setAttribute("user", null);
-            response.getWriter().println("Login failed!");
+        }
 
 //            PrintWriter pw = response.getWriter();
 //            pw.println("<script type=\"text/javascript\">");
 //            pw.println("alert('Invalid Username or Password');");
 //            pw.println("</script>");
-        }
-
     }
 
     /**
