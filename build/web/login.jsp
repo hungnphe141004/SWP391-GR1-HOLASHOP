@@ -93,10 +93,6 @@
                     <div class="col-sm-8">
                         <div class="shop-menu pull-right">
                             <ul class="nav navbar-nav">
-                                <li><a href="UserController"><i class="fa fa-user"></i> Account</a></li>
-                                <li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
-                                <li><a href="checkout"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                                <li><a href="cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
                                 <li><a href="login" class="active"><i class="fa fa-lock"></i> Login</a></li>
                             </ul>
                         </div>
@@ -129,12 +125,6 @@
                                         <li><a href="login" class="active">Login</a></li> 
                                     </ul>
                                 </li> 
-                                <li class="dropdown"><a href="feedback">Blog<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="blog.html">Blog List</a></li>
-                                        <li><a href="blog-single.html">Blog Single</a></li>
-                                    </ul>
-                                </li> 
                                 <li><a href="404.html">404</a></li>
                                 <li><a href="contact-us.html">Contact</a></li>
                             </ul>
@@ -152,13 +142,30 @@
         </div><!--/header-bottom-->
     </header><!--/header-->
 
+    <div class="container">
+        <div class="breadcrumbs">
+            <ol class="breadcrumb">
+                <li><a href="list">Home</a></li>
+                <li class="active">Login</li>
+            </ol>
+        </div>
+    </div>
     <body>
-        <form action="login" method="Post">
-            Username:<input type="text" name="username"/><br/>
-            Password:<input type="password" name="password"/><br/>
-            <input type="submit" value="Login"/>
+        <div style="text-align: center">
+            <form action="login" method="Post">
+                Username: <input type="text" name="username"/><br/>
+                Password: <input type="password" name="password"/><br/>
+                <input style="width: 150px; margin-left:10px"
+                       class="mt-5 text-center btn btn-primary profile-button" type="submit" value="Login"/>
 
-        </form>
+            </form>
+
+        </div>
+        <a href="register.jsp">
+            <button style="width: 150px; margin: auto; margin-left: 690px; margin-top: 10px"
+                    class="mt-5 text-center btn btn-primary profile-button" type="submit">Register
+            </button>
+        </a>
     </body>
     <footer id="footer"><!--Footer-->
         <div class="footer-top">

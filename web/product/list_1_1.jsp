@@ -102,10 +102,10 @@
                             <div class="shop-menu pull-right">
                                 <ul class="nav navbar-nav">
                                     <li><a href="UserController"><i class="fa fa-user"></i> Account</a></li>
-                                    <li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
                                     <li><a href="checkout"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                                     <li><a href="cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
                                     <li><a href="login"><i class="fa fa-lock"></i> Login</a></li>
+                                     <li><a href="logout" class=""><i class="fa fa-lock"></i> Logout</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -137,9 +137,7 @@
                                             <li><a href="login">Login</a></li> 
                                         </ul>
                                     </li> 
-                                    <li class="dropdown"><a href="feedback">Feedback<i class=""></i></a>
-
-                                    </li> 
+                                   
                                     <li><a href="404.html">404</a></li>
                                     <li><a href="contact-us.html">Contact</a></li>
                                 </ul>
@@ -200,13 +198,7 @@
                                 </div>
                             </div><!--/brands_products-->
 
-                            <div class="price-range"><!--price-range-->
-                                <h2>Price Range</h2>
-                                <div class="well">
-                                    <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]" id="sl2" ><br />
-                                    <b>$ 0</b> <b class="pull-right">$ 600</b>
-                                </div>
-                            </div><!--/price-range-->
+                            
 
                             <div class="shipping text-center"><!--shipping-->
                                 <img src="images/home/shipping.jpg" alt="" />
@@ -231,12 +223,7 @@
                                             </div>
 
                                         </div>
-                                        <div class="choose">
-                                            <ul class="nav nav-pills nav-justified">
-                                                <li><a href=""><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-                                                <li><a href=""><i class="fa fa-plus-square"></i>Add to compare</a></li>
-                                            </ul>
-                                        </div>
+                                       
                                     </div>
                                 </div>
                             </c:forEach>

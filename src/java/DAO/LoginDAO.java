@@ -40,6 +40,7 @@ public class LoginDAO extends DBContext {
                 user = new User();
                 user.setUserName(username);
                 user.setPassword(password);
+                user.setEmail(rs.getString("email"));
                 user.setId(Integer.parseInt(rs.getString("UserID")));
                 user.setRole(Integer.parseInt(rs.getString("RoleID")));
                 }

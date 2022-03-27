@@ -95,10 +95,10 @@
                             <div class="shop-menu pull-right">
                                 <ul class="nav navbar-nav">
                                     <li><a href="UserController"><i class="fa fa-user"></i> Account</a></li>
-                                    <li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
                                     <li><a href="checkout"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                                     <li><a href="cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
                                     <li><a href="login" class="active"><i class="fa fa-lock"></i> Login</a></li>
+                                    <li><a href="logout" class=""><i class="fa fa-lock"></i> Logout</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -128,12 +128,6 @@
                                             <li><a href="checkout.html">Checkout</a></li> 
                                             <li><a href="cart">Cart</a></li> 
                                             <li><a href="login" class="active">Login</a></li> 
-                                        </ul>
-                                    </li> 
-                                    <li class="dropdown"><a href="feedback">Blog<i class="fa fa-angle-down"></i></a>
-                                        <ul role="menu" class="sub-menu">
-                                            <li><a href="blog.html">Blog List</a></li>
-                                            <li><a href="blog-single.html">Blog Single</a></li>
                                         </ul>
                                     </li> 
                                     <li><a href="404.html">404</a></li>
@@ -169,28 +163,41 @@
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <h4 class="text-right">Your profile</h4>
                             </div>
+
                             <div class="row mt-2">
-                                <div class="col-md-6"><label class="labels">Name</label>
+                                <div class="col-md-6"><label class="labels">Your Username</label>
                                     <input type="text" class="form-control" id="userName" name="userName"
-                                           value="${sessionScope.user.userName}" readonly>
+                                           value="${requestScope.info.username}" readonly>
 
                                 </div>
 
-
-
                                 <div class="col-md-6"><label class="labels">Your Current Password</label>
-                                    <input type="text" class="form-control" id="password" name="password"
-                                           value="${sessionScope.user.password}" required >
+                                    <input type="password" class="form-control" id="password" name="password"
+                                           value="${requestScope.info.password}"  >
+                                    <input type="checkbox" onclick="myFunction()">Show Password
                                 </div>
 
 
                                 <div class="col-md-6"><label class="labels">Your Email</label>
                                     <input type="text" class="form-control" id="email" name="email"
-                                           value="${sessionScope.user.email}"  required>
+                                           value="${requestScope.info.email}"  >
+                                </div>
+                                <div class="col-md-6"><label class="labels">Your Ship Name</label>
+                                    <input type="text" class="form-control" id="" name="shipname"
+                                           value="${requestScope.info.shipname}"  >
+                                </div>
+                                <div class="col-md-6"><label class="labels">Your Ship Address</label>
+                                    <input type="text" class="form-control" id="" name="shipaddress"
+                                           value="${requestScope.info.shipaddress}"  >
+                                </div>
+                                <div class="col-md-6"><label class="labels">Your Phone Number</label>
+                                    <input type="text" class="form-control" id="" name="phone"
+                                           value="${requestScope.info.phone}"  >
                                 </div>
 
 
                             </div>
+
                             <button style="width: 250px"
                                     class="mt-5 text-center btn btn-primary profile-button" type="submit">Update Profile
                             </button>                     
@@ -384,7 +391,16 @@
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jquery.prettyPhoto.js"></script>
         <script src="js/main.js"></script>
-
+        <script>
+                                        function myFunction() {
+                                            var x = document.getElementById("password");
+                                            if (x.type === "password") {
+                                                x.type = "text";
+                                            } else {
+                                                x.type = "password";
+                                            }
+                                        }
+        </script>
 
     </body>
 </html>

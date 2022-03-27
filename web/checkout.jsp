@@ -97,10 +97,10 @@
                             <div class="shop-menu pull-right">
                                 <ul class="nav navbar-nav">
                                     <li><a href="UserController"><i class="fa fa-user"></i> Account</a></li>
-                                    <li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
                                     <li><a href="checkout" class="active"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                                     <li><a href="cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
                                     <li><a href="login"><i class="fa fa-lock"></i> Login</a></li>
+                                    <li><a href="logout" class=""><i class="fa fa-lock"></i> Logout</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -130,12 +130,6 @@
                                             <li><a href="checkout" class="active">Checkout</a></li> 
                                             <li><a href="cart">Cart</a></li> 
                                             <li><a href="login">Login</a></li> 
-                                        </ul>
-                                    </li> 
-                                    <li class="dropdown"><a href="feedback">Blog<i class="fa fa-angle-down"></i></a>
-                                        <ul role="menu" class="sub-menu">
-                                            <li><a href="blog.html">Blog List</a></li>
-                                            <li><a href="blog-single.html">Blog Single</a></li>
                                         </ul>
                                     </li> 
                                     <li><a href="404.html">404</a></li>
