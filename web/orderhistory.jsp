@@ -68,7 +68,7 @@
                             <div class="btn-group pull-right">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-                                        USA
+                                        VN
                                         <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu">
@@ -79,7 +79,7 @@
 
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-                                        DOLLAR
+                                        VND
                                         <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu">

@@ -11,6 +11,7 @@ package model;
  */
 public class UserAddress {
 
+    private int userid;
     private String id;
     private String name;
     private String address;
@@ -68,4 +69,13 @@ public class UserAddress {
         this.phonenum = phonenum;
     }
 
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
+    
 }

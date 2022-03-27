@@ -6,13 +6,16 @@
 package controller;
 
 import DAO.UserDAO;
+import connect.AccountDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.GroupAccount;
 import model.User;
+import model.UserInfo;
 
 /**
  *
@@ -58,7 +61,7 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         request.getRequestDispatcher("register.jsp").forward(request, response);
+        request.getRequestDispatcher("register.jsp").forward(request, response);
     }
 
     /**
@@ -72,20 +75,25 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("userName");
+        String username = request.getParameter("username");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
-     ;
         
-        UserDAO db = new UserDAO();
-        User u = new User();
-        u.setUserName(username);
-        u.setPassword(password);
-        u.setEmail(email);
-       ;
+        AccountDBContext db = new AccountDBContext();
+        User acc = new User();
+        acc.setUserName(username);
+        acc.setPassword(password);
+        acc.setEmail(email);
         
-        db.register(u);
-        response.getWriter().println("Register successful");
+        GroupAccount ga = new GroupAccount();
+        ga.setUsername(username);
+        
+//        UserInfo info = new UserInfo();
+//        info.setUserid(0);
+        
+        db.register(acc);
+        db.insert(ga);
+        response.sendRedirect("login");
     }
 
     /**
