@@ -5,16 +5,20 @@
  */
 package controller;
 
+import connect.CartDBContext;
 import connect.OrderDBContext;
 import connect.ShipDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Cart;
 import model.Order;
+import model.OrderDetail;
 import model.ShipInfo;
 import model.User;
 
@@ -92,8 +96,14 @@ public class OrderController extends HttpServlet {
 
         OrderDBContext db = new OrderDBContext();
         db.insert(o);
+        
+        CartDBContext cdb = new CartDBContext();
+        List<Cart> carts = cdb.getCart(user.getId());
+        for (Cart cart : carts) {
+            OrderDetail detail = new OrderDetail(db.getOrderId(user.getId()).getId(), cart.getId(), cart.getName(), cart.getPrice(), cart.getAmount());
+            db.insertOrderDetail(detail);
+        }
 
-//        OrderDetail detail = new OrderDetail();
 //        detail.setOrderid(db.getOrderId(user.getId()).getId());
 //        detail.setProduct_id(Integer.parseInt(request.getParameter("id")));
 //        detail.setProduct_name(request.getParameter("name"));
@@ -109,9 +119,11 @@ public class OrderController extends HttpServlet {
         ship.setNote(request.getParameter("message"));
         ship.setF0(Boolean.valueOf(request.getParameter("f0")));
         
+        boolean f0 = Boolean.valueOf(request.getParameter("f0"));
+        
+
         ShipDBContext sdb = new ShipDBContext();
         sdb.insert(ship);
-        
 
         db.delete(user.getId());
 

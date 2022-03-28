@@ -66,18 +66,7 @@ public class OrderDBContext extends DBContext {
 
     public int insertOrderDetail(OrderDetail order) {
         try {
-            String sql = "INSERT INTO [Order_Detail]\n"
-                    + "           ([Order_ID]\n"
-                    + "           ,[ProductID]\n"
-                    + "           ,[ProductName]\n"
-                    + "           ,[ProductPrice]\n"
-                    + "           ,[Quantity])\n"
-                    + "     VALUES\n"
-                    + "           (?\n"
-                    + "           ,?\n"
-                    + "           ,?\n"
-                    + "           ,?\n"
-                    + "           ,?)";
+            String sql = "INSERT INTO dbo.Order_Detail (Order_ID,ProductID,ProductName,ProductPrice,Quantity) VALUES(?,?,?,?,?)";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, order.getOrderid());
             stm.setInt(2, order.getProduct_id());
