@@ -190,7 +190,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminDetailController</servlet-name>
-        <url-pattern>/admin/detail</url-pattern>
+        <url-pattern>/admindetail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddToCartController</servlet-name>

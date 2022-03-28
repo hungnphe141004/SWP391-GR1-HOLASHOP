@@ -33,7 +33,7 @@
             </tr>
             <tr>
                 <td>${requestScope.product.id}</td>
-                    <td> <img src="../${requestScope.product.img.image}" alt="" style="width: 120px; height: 120px"/></td>
+                    <td> <img src="${requestScope.product.img.image}" alt="" style="width: 120px; height: 120px"/></td>
                     <td>${requestScope.product.name}</td>
                     <td>${requestScope.product.descrip}</td>
                     <td>${requestScope.product.oprice}</td>

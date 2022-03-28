@@ -34,14 +34,14 @@
         <script>
             function doUpdate(ProID)
             {
-                window.location.href = "update?ProID=" + ProID;
+                window.location.href = "adminupdate?ProID=" + ProID;
             }
             function doDelete(id)
             {
                 var c = confirm("Are you sure?");
                 if (c)
                 {
-                    window.location.href = "delete?id=" + id;
+                    window.location.href = "admindelete?id=" + id;
                 }
             }
         </script>
@@ -55,7 +55,7 @@
                 </ol>
             </div>
         </div>
-        Hello: ${sessionScope.user.userName}
+                          Hello: ${sessionScope.user.userName}
         <button><a href="add">Add New Product</a></button><br/><br/>
         <table border="1px"  style="margin-left:auto;margin-right:auto; width: 1500px; text-align: center; border-color: blue#33ccff;
                background-color:#f6f7f8; color: brown; border-collapse: collapse">
@@ -83,7 +83,7 @@
             <c:forEach items="${requestScope.products}" var="p">
                 <tr>
                     <td>${p.id}</td>
-                    <td> <img src="../${p.img.image}" alt="" style="width: 120px; height: 120px"/></td>
+                    <td> <img src="${p.img.image}" alt="" style="width: 120px; height: 120px"/></td>
                     <td>${p.name}</td>
                     <td>${p.descrip}</td>
                     <td>${p.oprice}</td>
@@ -97,7 +97,7 @@
                     <td>${p.hei}</td>
                     <td>${p.wid}</td>
                     <td>${p.wei}</td>
-                    <td><a href="detail?ProID=${p.id}">Detail</a></td>
+                    <td><a href="admindetail?ProID=${p.id}">Detail</a></td>
                     <td>
                         <input type="button" onclick="doUpdate(${p.id});" value="Update"/>
                     </td>

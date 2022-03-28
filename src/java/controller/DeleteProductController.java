@@ -34,7 +34,7 @@ public class DeleteProductController extends HttpServlet {
        ProductDBContext db = new ProductDBContext();
        db.delete(id);
        db.deleteImg(id);
-       response.sendRedirect("list");
+       response.sendRedirect("adminlist");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
