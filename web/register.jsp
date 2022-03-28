@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>User Profile</title>
+        <title>Register</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet">
         <link href="css/prettyPhoto.css" rel="stylesheet">
@@ -23,10 +23,9 @@
         <link href="css/animate.css" rel="stylesheet">
         <link href="css/main.css" rel="stylesheet">
         <link href="css/responsive.css" rel="stylesheet">
-        <!--[if lt IE 9]>
-        <script src="js/html5shiv.js"></script>
-        <script src="js/respond.min.js"></script>
-        <![endif]-->       
+        <link rel="stylesheet" type="text/css" href="css/icon-font.min.css">
+        <link rel="stylesheet" type="text/css" href="css/login.css">
+        <link rel="stylesheet" type="text/css" href="css/login_util.css">     
         <link rel="shortcut icon" href="images/ico/favicon.ico">
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
@@ -145,34 +144,44 @@
         </div><!--/header-bottom-->
     </header><!--/header-->
     <body>
-        <form action="register" method="POST">
-            <table border="0" style="margin: auto">
+        <div class="limiter">
+            <div class="container-login100">
+                <div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
+                    <form action="register" method="POST" class="login100-form validate-form">
+                        <span class="login100-form-title p-b-55">
+                            Register
+                        </span>
 
-                <tbody>
-                    <tr>
-                        <td>Username </td>
-                        <td><input type="text" name="username"></td>
-                    </tr>
-                    <tr>
-                        <td>Password</td>
-                        <td><input type="password" name="password"></td>
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-
-                        <td><input type="text" name="email"></td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td><input style="width: 80px; margin-right:-10px"
-                                   class="mt-5 text-center btn btn-primary profile-button" type="submit" value="Register"</td>
-                    </tr>
-                </tbody>
-            </table>
-
-        </form>
+                        <div class="wrap-input100 validate-input m-b-16" >
+                            <input class="input100" type="text" name="username" placeholder="Username">
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <span class="lnr lnr-envelope"></span>
+                            </span>
+                        </div>
+                        <div class="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
+                            <input class="input100" type="password" name="password" placeholder="Password">
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <span class="lnr lnr-lock"></span>
+                            </span>
+                        </div>
+                        <div class="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
+                            <input class="input100" type="text" name="email" placeholder="Email">
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <span class="lnr lnr-cloud-sync"></span>
+                            </span>
+                        </div>
+                        <div class="container-login100-form-btn p-t-25">
+                            <button type="submit" class="login100-form-btn" value="Register" style="background-color: #333;">
+                                Register
+                            </button>
+                        </div>        
+                    </form>
+                </div>    
+            </div>
+        </div>
     </body>
     <footer id="footer"><!--Footer-->
         <div class="footer-top">

@@ -14,7 +14,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>User Profile</title>
+        <title>Login</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet">
         <link href="css/prettyPhoto.css" rel="stylesheet">
@@ -22,10 +22,9 @@
         <link href="css/animate.css" rel="stylesheet">
         <link href="css/main.css" rel="stylesheet">
         <link href="css/responsive.css" rel="stylesheet">
-        <!--[if lt IE 9]>
-        <script src="js/html5shiv.js"></script>
-        <script src="js/respond.min.js"></script>
-        <![endif]-->       
+        <link rel="stylesheet" type="text/css" href="css/icon-font.min.css">
+        <link rel="stylesheet" type="text/css" href="css/login.css">
+        <link rel="stylesheet" type="text/css" href="css/login_util.css">
         <link rel="shortcut icon" href="images/ico/favicon.ico">
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
@@ -141,31 +140,46 @@
             </div>
         </div><!--/header-bottom-->
     </header><!--/header-->
-
-    <div class="container">
-        <div class="breadcrumbs">
-            <ol class="breadcrumb">
-                <li><a href="list">Home</a></li>
-                <li class="active">Login</li>
-            </ol>
-        </div>
-    </div>
     <body>
-        <div style="text-align: center">
-            <form action="login" method="Post">
-                Username: <input type="text" name="username"/><br/>
-                Password: <input type="password" name="password"/><br/>
-                <input style="width: 150px; margin-left:10px"
-                       class="mt-5 text-center btn btn-primary profile-button" type="submit" value="Login"/>
+        <div class="limiter">
+            <div class="container-login100">
+                <div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
+                    <form action="login" method="Post" class="login100-form validate-form">
+                        <span class="login100-form-title p-b-55">
+                            Login
+                        </span>
+                        <div class="wrap-input100 validate-input m-b-16" >
+                            <input class="input100" type="text" name="username" placeholder="Username">
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <span class="lnr lnr-envelope"></span>
+                            </span>
+                        </div>
+                        <div class="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
+                            <input class="input100" type="password" name="password" placeholder="Password">
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <span class="lnr lnr-lock"></span>
+                            </span>
+                        </div>
+                        <div class="container-login100-form-btn p-t-25">
+                            <button type="submit" class="login100-form-btn" value="Login" style="background-color: #333;">
+                                Login
+                            </button>
+                        </div>
+                        <div class="text-center w-full p-t-115">
+                            <span class="txt1">
+                                Not a member?
+                            </span>
 
-            </form>
-
-        </div>
-        <a href="register.jsp">
-            <button style="width: 150px; margin: auto; margin-left: 690px; margin-top: 10px"
-                    class="mt-5 text-center btn btn-primary profile-button" type="submit">Register
-            </button>
-        </a>
+                            <a class="txt1 bo1 hov1" href="register.jsp" type="submit">
+                                Sign up now							
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>        
     </body>
     <footer id="footer"><!--Footer-->
         <div class="footer-top">
