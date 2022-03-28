@@ -104,7 +104,6 @@ public class OrderController extends HttpServlet {
             db.insertOrderDetail(detail);
         }
 
-//        OrderDetail detail = new OrderDetail();
 //        detail.setOrderid(db.getOrderId(user.getId()).getId());
 //        detail.setProduct_id(Integer.parseInt(request.getParameter("id")));
 //        detail.setProduct_name(request.getParameter("name"));
@@ -122,9 +121,11 @@ public class OrderController extends HttpServlet {
         ship.setNote(request.getParameter("message"));
         ship.setF0(Boolean.valueOf(request.getParameter("f0")));
         
+        boolean f0 = Boolean.valueOf(request.getParameter("f0"));
+        
+
         ShipDBContext sdb = new ShipDBContext();
         sdb.insert(ship);
-        
 
         db.delete(user.getId());
 

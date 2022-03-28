@@ -300,7 +300,12 @@
                     </div>
                 </div>
                 <input type="submit" value="Order" style="margin-left:780px" class="btn btn-primary"/>
+<<<<<<< HEAD
                 </form>
+=======
+                </form><br/><br/>
+
+>>>>>>> 18d5a40ac035801c92b6cef6f39f7f48c66d9c9d
             </div>
         </section> <!--/#cart_items-->
 
