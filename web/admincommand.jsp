@@ -152,7 +152,7 @@
                         <h1 style="text-align: center">Admin Command</h1> 
                     </div>
                     <div class="card-body">
-                        <a href="admin/list">
+                        <a href="adminlist">
                             <button style="width: 150px; margin-left:200px"
                                     class="mt-5 text-center btn btn-primary profile-button" type="submit">Product Manage
                             </button>

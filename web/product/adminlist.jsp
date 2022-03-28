@@ -50,7 +50,7 @@
         <div class="container">
             <div class="breadcrumbs">
                 <ol class="breadcrumb">
-                    <li><a href="../admincommand.jsp">Back</a></li>
+                    <li><a href="admincommand.jsp">Back</a></li>
                     <li class="active">Product Manage</li>
                 </ol>
             </div>

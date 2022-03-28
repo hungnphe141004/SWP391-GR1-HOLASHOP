@@ -63,7 +63,7 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="logo pull-left">
-                                <a href="index.jsp"><img src="images/home/logo.png" alt="" /></a>
+                                <a href="list"><img src="images/home/logo.png" alt="" /></a>
                             </div>
                             <div class="btn-group pull-right">
                                 <div class="btn-group">
@@ -92,17 +92,11 @@
                         <div class="col-sm-8">
                             <div class="shop-menu pull-right">
                                 <ul class="nav navbar-nav">
-                                    <li class="dropdown"><a href="#"><i class="fa fa-user"></i>Account<i class="fa fa-angle-down"></i></a>
-                                        <ul role="menu" class="sub-menu">
-                                            <li><a href="viewOrder">Order History</a></li>
-
-                                        </ul>
-                                    </li> 
-
-                                    <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
-                                    <li><a href="checkout.jsp"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                                    <li><a href="cart.jsp"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                                    <li><a href="login.jsp"><i class="fa fa-lock"></i> Login</a></li>
+                                    <li><a href="UserController"><i class="fa fa-user"></i> Account</a></li>
+                                    <li><a href="checkout"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+                                    <li><a href="cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                                    <li><a href="login"><i class="fa fa-lock"></i> Login</a></li>
+                                    <li><a href="logout" class=""><i class="fa fa-lock"></i> Logout</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -124,20 +118,13 @@
                             </div>
                             <div class="mainmenu pull-left">
                                 <ul class="nav navbar-nav collapse navbar-collapse">
-                                    <li><a href="index.jsp" class="active">Home</a></li>
-                                    <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
+                                    <li><a href="list" class="active">Home</a></li>
+                                    <li class="dropdown"><a href="list">Shop<i class="fa fa-angle-down"></i></a>
                                         <ul role="menu" class="sub-menu">
-                                            <li><a href="shop.jsp">Products</a></li>
-                                            <li><a href="product-details.jsp">Product Details</a></li> 
-                                            <li><a href="checkout.jsp">Checkout</a></li> 
-                                            <li><a href="cart.jsp">Cart</a></li> 
-                                            <li><a href="login.jsp">Login</a></li> 
-                                        </ul>
-                                    </li> 
-                                    <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
-                                        <ul role="menu" class="sub-menu">
-                                            <li><a href="blog.jsp">Blog List</a></li>
-                                            <li><a href="blog-single.jsp">Blog Single</a></li>
+                                            <li><a href="list">Products</a></li>
+                                            <li><a href="checkout">Checkout</a></li> 
+                                            <li><a href="cart">Cart</a></li> 
+                                            <li><a href="login">Login</a></li> 
                                         </ul>
                                     </li> 
                                     <li><a href="404.jsp">404</a></li>
@@ -145,11 +132,13 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-sm-3">
-                            <div class="search_box pull-right">
-                                <input type="text" placeholder="Search"/>
+                        <form action="search">
+                            <div class="col-sm-3">
+                                <div class="search_box pull-right">
+                                    <input type="text" name="ProductName" value="${requestScope.name}" placeholder="Search"/>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div><!--/header-bottom-->
@@ -188,31 +177,31 @@
 
                                 <c:forEach items="${requestScope.orders}" var="o">
                                     <tr>
-                                        <td>${o.id}</td>
-                                        <td>${o.userId}</td>
-                                        <td>${o.totalPrice}</td>
-                                        <td>${o.note}</td>
-                                        <c:if test="${o.status == 1}">
-                                            <td><span class="badge rounded-pill bg-secondary">Waiting for Confirmation</span></td>
-                                        </c:if>
-                                        <c:if test="${o.status == 2}">
-                                            <td><span class="badge rounded-pill bg-warning text-dark">Packing</span></td>
-                                        </c:if>
-                                        <c:if test="${o.status == 3}">
-                                            <td><span class="badge rounded-pill bg-primary">Delivering</span></td>
-                                        </c:if>
-                                        <c:if test="${o.status == 4}">
-                                            <td><span class="badge bg-danger">Canceled</span></td>
-                                        </c:if>
-                                        <c:if test="${o.status == 5}">
-                                            <td><span class="badge bg-success">completed</span></td>
-                                        </c:if>
-                                        <td>${o.date}</td>
+                                        <td>${o.id}</td><input type="hidden" name="id" value="${o.id}"/>
+                                    <td>${o.userId}</td>
+                                    <td>${o.totalPrice}</td>
+                                    <td>${o.note}</td>
+                                    <c:if test="${o.status == 1}">
+                                        <td><span class="badge rounded-pill bg-secondary">Waiting for Confirmation</span></td>
+                                    </c:if>
+                                    <c:if test="${o.status == 2}">
+                                        <td><span class="badge rounded-pill bg-warning text-dark">Packing</span></td>
+                                    </c:if>
+                                    <c:if test="${o.status == 3}">
+                                        <td><span class="badge rounded-pill bg-primary">Delivering</span></td>
+                                    </c:if>
+                                    <c:if test="${o.status == 4}">
+                                        <td><span class="badge bg-danger">Canceled</span></td>
+                                    </c:if>
+                                    <c:if test="${o.status == 5}">
+                                        <td><span class="badge bg-success">completed</span></td>
+                                    </c:if>
+                                    <td>${o.date}</td>
 
-                                        <td>
-                                            <input type="button" onclick="showMess(${o.id});" value="Delete"/>
-                                        </td>
-                                        <td><a href="detailOrder?id=${o.id}">Detail</a></td>
+                                    <td>
+                                        <input type="button" onclick="showMess(${o.id});" value="Delete"/>
+                                    </td>
+                                    <td><a href="detailOrder?id=${o.id}">Detail</a></td>
 
                                     </tr>
                                 </c:forEach>
@@ -392,14 +381,14 @@
         <script src="js/main.js"></script>
     </body>
     <script>
-                                                function  showMess(id) {
+                                            function  showMess(id) {
+                                                {
+                                                    var c = confirm("Are you sure?");
+                                                    if (c)
                                                     {
-                                                        var c = confirm("Are you sure?");
-                                                        if (c)
-                                                        {
-                                                            window.location.href = "delete?id=" + id;
-                                                        }
+                                                        window.location.href = "deleteorder?id=" + id;
                                                     }
                                                 }
+                                            }
     </script>
 </html>

@@ -150,7 +150,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DeleteOrderController</servlet-name>
-        <url-pattern>/delete</url-pattern>
+        <url-pattern>/deleteorder</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>OrderDetailController</servlet-name>
@@ -166,19 +166,19 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminListController</servlet-name>
-        <url-pattern>/admin/list</url-pattern>
+        <url-pattern>/adminlist</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddProductController</servlet-name>
-        <url-pattern>/admin/add</url-pattern>
+        <url-pattern>/adminadd</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DeleteProductController</servlet-name>
-        <url-pattern>/admin/delete</url-pattern>
+        <url-pattern>/admindelete</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UpdateProductController</servlet-name>
-        <url-pattern>/admin/update</url-pattern>
+        <url-pattern>/adminupdate</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SearchByBrand</servlet-name>

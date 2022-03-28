@@ -92,6 +92,7 @@ public class OrderDBContext extends DBContext {
             Logger.getLogger(OrderDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+      
 
     public ArrayList<Order> getAllOrder() {
         ArrayList<Order> orders = new ArrayList<>();
