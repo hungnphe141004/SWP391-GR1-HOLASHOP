@@ -294,30 +294,13 @@
                             <div class="order-message">
                                 <p>Shipping Note</p>
                                 <textarea name="message"  placeholder="Notes about your order, Special Notes for Delivery" rows="16"></textarea>
-                                <label><input type="checkbox" name="f0"> At risk of contracting covid</label>
+                                <input type="checkbox" name="f0" value="True"> <label>At risk of contracting covid</label>
                             </div>	
                         </div>					
                     </div>
                 </div>
-                <input type="submit" value="Order" class="btn btn-primary"/>
+                <input type="submit" value="Order" style="margin-left:780px" class="btn btn-primary"/>
                 </form>
-                <div class="review-payment">
-                    <h2>Review & Payment</h2>
-                </div>
-
-
-
-                <div class="payment-options">
-                    <span>
-                        <label><input type="checkbox"> Direct Bank Transfer</label>
-                    </span>
-                    <span>
-                        <label><input type="checkbox"> Check Payment</label>
-                    </span>
-                    <span>
-                        <label><input type="checkbox"> Paypal</label>
-                    </span>
-                </div>
             </div>
         </section> <!--/#cart_items-->
 
