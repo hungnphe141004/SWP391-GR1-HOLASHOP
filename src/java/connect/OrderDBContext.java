@@ -92,7 +92,6 @@ public class OrderDBContext extends DBContext {
             Logger.getLogger(OrderDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-      
 
     public ArrayList<Order> getAllOrder() {
         ArrayList<Order> orders = new ArrayList<>();
@@ -179,6 +178,47 @@ public class OrderDBContext extends DBContext {
         return null;
     }
 
+    public ArrayList<Order> getOrderByUserId(int id) {
+        ArrayList<Order> orders = new ArrayList<>();
+        try {
+
+            String sql = "SELECT o.[ID]\n"
+                    + "      ,o.[UserID]\n"
+                    + "      ,[TotalPrice]\n"
+                    + "      ,[Note]\n"
+                    + "      ,[Status]\n"
+                    + "      ,[Date]\n"
+                    + "	  ,[ShipName]\n"
+                    + "	  ,[ShipAddress]\n"
+                    + "	  ,[PhoneNum]\n"
+                    + "  FROM [Orders] o inner join UserAddress u on  o.[UserID] = u.[UserID] where o.UserID = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            Order s = null;
+            while (rs.next()) {
+
+                if (s == null) {
+                    s = new Order();
+                    s.setId(rs.getInt("ID"));
+                    s.setUserId(rs.getInt("UserID"));
+                    s.setTotalPrice(rs.getInt("TotalPrice"));
+                    s.setNote(rs.getString("Note"));
+                    s.setStatus(rs.getString("Status"));
+                    s.setDate(rs.getDate("Date"));
+                    s.setName(rs.getString("ShipName"));
+                    s.setAddress(rs.getString("ShipAddress"));
+                    s.setPhone(rs.getString("PhoneNum"));
+
+                }
+
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(CartDBContext.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return orders;
+    }
+
     public static void main(String[] args) {
         OrderDBContext db = new OrderDBContext();
 //        int id = 1;
@@ -201,11 +241,14 @@ public class OrderDBContext extends DBContext {
 //        detail.setAmount(1);
 //
 //        db.insertOrderDetail(detail);
-        for (Order o : db.getAllOrder()) {
-            System.out.println(o.getTotalPrice());
+//        for (Order o : db.getOrderByUserId(4)) {
+//            System.out.println(o.getTotalPrice());
+//        }
+        for (Order cart : db.getOrderByUserId(4)) {
+            System.out.println(cart.getTotalPrice());
+//        }
+//        Order o = db.getOrderById(4);
+//        System.out.println(o.getTotalPrice());
         }
-
-        Order o = db.getOrderById(4);
-        System.out.println(o.getTotalPrice());
     }
 }

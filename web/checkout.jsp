@@ -290,13 +290,16 @@
                                 </div>
                             </div>
                         </div>
+                                <input type="checkbox" name="f0" value="True" style="width: 30px;height: 30px; "> <label>At risk of contracting covid</label>
                         <div class="col-sm-4">
                             <div class="order-message">
                                 <p>Shipping Note</p>
                                 <textarea name="message"  placeholder="Notes about your order, Special Notes for Delivery" rows="16"></textarea>
-                                <input type="checkbox" name="f0" value="True"> <label>At risk of contracting covid</label>
+
                             </div>	
-                        </div>					
+
+                        </div>
+                        
                     </div>
                 </div>
                 <input type="submit" value="Order" style="margin-left:780px" class="btn btn-primary"/>

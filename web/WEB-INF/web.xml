@@ -116,6 +116,10 @@
         <servlet-name>LogoutController</servlet-name>
         <servlet-class>controller.LogoutController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserOrderHistoryController</servlet-name>
+        <servlet-class>controller.UserOrderHistoryController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -231,6 +235,10 @@
     <servlet-mapping>
         <servlet-name>LogoutController</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserOrderHistoryController</servlet-name>
+        <url-pattern>/userorder</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -168,7 +168,6 @@
                                     <th>User ID</th>
                                     <th>Total price</th>
                                     <th>Note</th>
-                                    <th>Status</th>
                                     <th>Date</th>
                                     <th>Delete</th>
                                     <th>Detail</th>
@@ -181,21 +180,7 @@
                                     <td>${o.userId}</td>
                                     <td>${o.totalPrice}</td>
                                     <td>${o.note}</td>
-                                    <c:if test="${o.status == 1}">
-                                        <td><span class="badge rounded-pill bg-secondary">Waiting for Confirmation</span></td>
-                                    </c:if>
-                                    <c:if test="${o.status == 2}">
-                                        <td><span class="badge rounded-pill bg-warning text-dark">Packing</span></td>
-                                    </c:if>
-                                    <c:if test="${o.status == 3}">
-                                        <td><span class="badge rounded-pill bg-primary">Delivering</span></td>
-                                    </c:if>
-                                    <c:if test="${o.status == 4}">
-                                        <td><span class="badge bg-danger">Canceled</span></td>
-                                    </c:if>
-                                    <c:if test="${o.status == 5}">
-                                        <td><span class="badge bg-success">completed</span></td>
-                                    </c:if>
+                                    
                                     <td>${o.date}</td>
 
                                     <td>

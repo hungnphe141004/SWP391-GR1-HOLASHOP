@@ -106,6 +106,7 @@
                                     <li><a href="cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
                                     <li><a href="login"><i class="fa fa-lock"></i> Login</a></li>
                                     <li><a href="logout" class=""><i class="fa fa-lock"></i> Logout</a></li>
+                                   
                                 </ul>
                             </div>
                         </div>

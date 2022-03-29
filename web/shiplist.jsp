@@ -93,6 +93,7 @@
                                 <li><a href="checkout"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                                 <li><a href="cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
                                 <li><a href="login" class="active"><i class="fa fa-lock"></i> Login</a></li>
+                                <li><a href="logout" class=""><i class="fa fa-lock"></i> Logout</a></li>
                             </ul>
                         </div>
                     </div>
