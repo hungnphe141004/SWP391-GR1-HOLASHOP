@@ -154,7 +154,14 @@
                 </div>
             </div><!--/header-bottom-->
         </header><!--/header-->
-
+        <div class="container">
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li><a href="viewOrder">Back</a></li>
+                    <li class="active">Order Detail</li>
+                </ol>
+            </div>
+        </div>
 
 
         <div class="row">
