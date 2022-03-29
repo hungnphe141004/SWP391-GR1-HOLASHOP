@@ -56,7 +56,7 @@
             </div>
         </div>
                           Hello: ${sessionScope.user.userName}
-        <button><a href="add">Add New Product</a></button><br/><br/>
+        <button><a href="adminadd">Add New Product</a></button><br/><br/>
         <table border="1px"  style="margin-left:auto;margin-right:auto; width: 1500px; text-align: center; border-color: blue#33ccff;
                background-color:#f6f7f8; color: brown; border-collapse: collapse">
             <tr>

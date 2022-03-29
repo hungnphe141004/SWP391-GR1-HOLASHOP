@@ -127,7 +127,7 @@ public class AddProductController extends HttpServlet {
         db.insert(p);
         db.insertImg(i);
         
-        response.sendRedirect("list");
+        response.sendRedirect("adminlist");
     }
 
     /**

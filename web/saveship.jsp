@@ -152,7 +152,7 @@
             <input type="submit" value="Save"/>
 
         </form> 
-                   <hr>
+                   
 
         <table class="table table-striped table-dark">
             <thead>

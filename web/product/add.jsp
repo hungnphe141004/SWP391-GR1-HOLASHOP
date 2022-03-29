@@ -13,7 +13,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="add" method="POST">
+        <form action="adminadd" method="POST">
             Product Id: <input type="text" name="id"/><br/>
             Product Image: <input type="text" name="img" placeholder="Image/xxx.jpg"/><br/>
             Product Name: <input type="text" name="name"/> <br/>
